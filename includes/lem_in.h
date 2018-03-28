@@ -19,7 +19,6 @@
 
 struct					s_ant
 {
-	//a path
 	int					number;
 	char				*location;
 };

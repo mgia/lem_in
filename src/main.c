@@ -19,8 +19,40 @@ void	error(static char *str)
 		ft_putendl("Error : invalid room");
 }
 
+void	parse_ants(t_ant *info)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	if (!get_next_line(0, &line))
+	{
+		error("NO_FILE");
+		return ;
+	}
+	info->number = ft_atoi(line);
+	while (line[i])
+	{
+		if (!ft_isdigit(line[i]) || info->number <= 0)
+		{
+			error("NO_ANTS")
+			return ;
+		}
+		i++;
+	}
+	ft_putendl(line);
+	free(line);
+}
+
+void	parse_input(t_ant *ants)
+{
+	parse_ants(ants);
+}
+
 int		main(void)
 {
-	// parse()
+	t_ant	ants;
+
+	parse_input(&ants);
 	return (0);
 }
