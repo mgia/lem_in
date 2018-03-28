@@ -6,12 +6,14 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:00:21 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/28 14:07:56 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/28 14:12:59 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
+
+# include "math.h"
 
 /*
 ** Structures
