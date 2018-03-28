@@ -30,11 +30,15 @@ struct					s_vertex
 {
 	char				*name;
 	t_point				pos;
+	int					start;
+	int					end;
 };
 typedef struct s_vertex	t_vertex;
 
 /*
 ** Functions
 */
+
+int		ft_isdigit_str(char *str);
 
 #endif
