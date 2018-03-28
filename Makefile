@@ -31,14 +31,14 @@ OBJ_FILES = $(SRC_FILES:%.c=%.o)
 # full path
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
-LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT = $(LIBFT_DIR)libft.a
 INCLUDES = -I $(LIBFT_DIR)includes -I includes/
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
+	@$(MAKE) -C $(LIBFT_DIR)
+	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
 	echo "[INFO] Lem-in executable created"
 
 $(OBJ): $(SRC)
