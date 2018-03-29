@@ -15,6 +15,18 @@
 
 # include "math.h"
 
+# define NO_FILE 0
+# define NO_ANTS 1
+# define NO_EXITS 2
+# define NO_ROOMS 3
+# define ILLEGAL_NAME 4
+# define NO_PATH 5
+# define INVALID_ROOM 6
+
+# define REG 0
+# define START 1
+# define END 2
+
 /*
 ** Structures
 */
@@ -29,9 +41,8 @@ typedef struct s_ant	t_ant;
 struct					s_vertex
 {
 	char				*name;
+	int					type;
 	t_point				pos;
-	int					start;
-	int					end;
 };
 typedef struct s_vertex	t_vertex;
 
@@ -40,5 +51,6 @@ typedef struct s_vertex	t_vertex;
 */
 
 int		ft_isdigit_str(char *str);
+char	*ft_strndup(const char *s, int n);
 
 #endif
