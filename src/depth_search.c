@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 19:44:40 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/29 21:43:52 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/29 23:02:28 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_list	*find_paths_rec(t_vertex c, t_vertex e, int *p, int p_ind)
 		while (kids)
 		{
 			kid = *(t_vertex *)kids->content;
-			kids = kids->next;
 			if (!is_in_arr(p, p_ind, kid.number))
 			{
 				buf = find_paths_rec(kid, e, p, p_ind + 1);
@@ -62,6 +61,7 @@ t_list	*find_paths_rec(t_vertex c, t_vertex e, int *p, int p_ind)
 				else if (buf && res)
 					ft_lstaddlst(&res, buf);
 			}
+			kids = kids->next;
 		}
 	return (res);
 }
@@ -71,7 +71,7 @@ t_list	*find_paths(t_graph g, int s, int e)
 	int		*path;
 	t_list	*paths;
 
-	path = ft_memalloc(g.V);
+	path = ft_memalloc(g.V * sizeof(int));
 	paths = find_paths_rec(g.nodes[s], g.nodes[e], path, 0);
 	free(path);
 	return (paths);
