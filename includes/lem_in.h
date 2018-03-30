@@ -15,6 +15,7 @@
 
 # include "math.h"
 # include "list.h"
+# include "matrix.h"
 
 # define NO_FILE 0
 # define NO_ANTS 1
@@ -62,6 +63,7 @@ typedef struct s_ant	t_ant;
 
 int		ft_isdigit_str(char *str);
 char	*ft_strndup(const char *s, int n);
+void	print_matrix(t_matrix *m, const char *type);
 
 void	add_edge(t_vertex *l, int p, int c);
 void	print_paths(t_vertex *g, int s, int e);
