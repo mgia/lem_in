@@ -40,7 +40,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@$(MAKE) -C $(LIBFT_DIR)
 	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
-	echo "[INFO] Lem-in executable created"
+	@echo "[INFO] Lem-in executable created"
 
 $(OBJ): $(SRC)
 	@mkdir -p $(OBJ_DIR)
