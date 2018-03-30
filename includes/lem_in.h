@@ -17,18 +17,6 @@
 # include "list.h"
 # include "matrix.h"
 
-# define NO_FILE 0
-# define NO_ANTS 1
-# define NO_EXITS 2
-# define NO_ROOMS 3
-# define ILLEGAL_NAME 4
-# define NO_PATH 5
-# define INVALID_ROOM 6
-
-# define REG 0
-# define START 1
-# define END 2
-
 /*
 ** Structures
 */
@@ -64,7 +52,14 @@ int		ft_isdigit_str(char *str);
 char	*ft_strndup(const char *s, int n);
 // void	print_matrix(t_matrix *m, const char *type);
 
+// void	print_paths(t_vertex *g, int s, int e);
+
 void	add_edge(t_vertex *l, int p, int c);
-void	print_paths(t_vertex *g, int s, int e);
+size_t	ft_graphlen(t_vertex *g);
+
+void	print_int_arr(int *a, int size);
+int		is_in_arr(int *a, int size, int el);
+t_list	*find_paths_rec(t_vertex c, t_vertex e, int *p, int p_ind);
+t_list	*find_paths(t_vertex *g, int s, int e);
 
 #endif
