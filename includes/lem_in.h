@@ -32,13 +32,6 @@
 ** Structures
 */
 
-struct					s_ant
-{
-	int					number;
-	char				*location;
-};
-typedef struct s_ant	t_ant;
-
 struct					s_vertex
 {
 	char				*name;
@@ -48,6 +41,20 @@ struct					s_vertex
 	t_point				pos;
 };
 typedef struct s_vertex	t_vertex;
+
+struct					s_graph
+{
+	int					V;
+	t_vertex			*nodes;
+};
+typedef struct s_graph	t_graph;
+
+struct					s_ant
+{
+	int					number;
+	char				*location;
+};
+typedef struct s_ant	t_ant;
 
 /*
 ** Functions
