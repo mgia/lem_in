@@ -22,7 +22,7 @@ void	parse_ants(t_ant *ants)
 	free(line);
 }
 
-void	parse_rooms(t_vertex *v)
+char	*parse_rooms(t_vertex *v)
 {
 	char		*line;
 	int			start;
@@ -32,7 +32,6 @@ void	parse_rooms(t_vertex *v)
 	int			j;
 	int			x;
 	int			y;
-	char		**tmp;
 	// t_vertex	*v;
 
 	// v = *vertex;
@@ -100,20 +99,30 @@ void	parse_rooms(t_vertex *v)
 	v[i].number = -1;
 	if (!links)
 		error("Error: No Links");
-	else
+	return (line);
+}
+
+void	parse_links(t_vertex *v, char *line)
+{
+	int x = 0;
+	int y = 0;
+	int j = 0;
+	char **tmp;
+	if (line != NULL)
 	{
 		ft_putendl(line);
 		tmp = ft_strsplit(line, '-');
-		printf("strplit?");
 		j = 0;
+		printf("tmp[0]: %s tmp[1]: %s\n", tmp[0], tmp[1]);
 		while (!ft_strequ(tmp[0], v[j].name))
 			j++;
 		x = j;
 		j = 0;
 		while (!ft_strequ(tmp[1], v[j].name))
+			j++;
 		y = j;
 		printf("x y: %d %d\n", x, y);
-		add_edge(v, x ,y);
+		// add_edge(v, x ,y);
 		free(tmp[0]);
 		free(tmp[1]);
 		tmp = NULL;
@@ -129,21 +138,24 @@ void	parse_rooms(t_vertex *v)
 		x = j;
 		j = 0;
 		while (!ft_strequ(tmp[1], v[j].name))
+			j++;
 		y = j;
-		add_edge(v, x ,y);
+		printf("x y: %d %d\n", x, y);
+		// add_edge(v, x ,y);
 		free(tmp[0]);
 		free(tmp[1]);
 		tmp = NULL;
 		free(line);
 	}
 	printf("exits\n");
-	// find_paths(v, 2, 3);
 }
 
 void	parse_input(t_ant *ants, t_vertex *v)
 {
+	char *line;
 	parse_ants(ants);
-	parse_rooms(v);
+	line = parse_rooms(v);
+	parse_links(v, line);
 }
 
 void	ivan_test(void)
