@@ -45,17 +45,40 @@ struct					s_ant
 typedef struct s_ant	t_ant;
 
 /*
-** Functions
+** Parsers
 */
 
-int		ft_isdigit_str(char *str);
-char	*ft_strndup(const char *s, int n);
-// void	print_matrix(t_matrix *m, const char *type);
+void	parse_input(t_ant *ants, t_vertex *v);
+void	parse_ants(t_ant *ants);
+char	*parse_vertex(t_vertex *v);
+void	parse_coordinates(t_vertex *v, char *line, int i, int j);
+void	parse_comment(char *line, int *ends, int *i);
+void	parse_links(t_vertex *v, char *line);
+void	store_vertex(t_vertex *v, char *line, int i);
+void	store_link(t_vertex *v, char *line);
+
+/*
+** IVAN: Rename title
+*/
 
 void	print_int_arr(int *a, int size);
 int		is_in_arr(int *a, int size, int el);
 void	add_edge(t_graph g, int p, int c);
 void	free_graph(t_graph g);
 t_list	*find_paths(t_graph g, int s, int e);
+
+/*
+** Helpers
+*/
+
+void	error(const char *str);
+
+/*
+** Libft Additional Functions
+*/
+
+int		ft_isdigit_str(char *str);
+char	*ft_strndup(const char *s, int n);
+void	print_matrix(t_matrix *m, const char *type);
 
 #endif
