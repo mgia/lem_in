@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtan <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/30 10:56:53 by mtan              #+#    #+#             */
+/*   Updated: 2018/03/30 10:56:54 by mtan             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 #include "libft.h"
 
@@ -22,139 +34,122 @@ void	parse_ants(t_ant *ants)
 	free(line);
 }
 
-char	*parse_rooms(t_vertex *v)
+void	parse_coordinates(t_vertex *v, char *line, int i, int j)
+{
+	int x;
+	int y;
+
+	while (line[j] == ' ')
+		j++;
+	if (!ft_isdigit(line[j]))
+		error("Error: forbidden co-ordinates");
+	x = ft_atoi(&line[j]);
+	while (ft_isdigit(line[j]))
+		j++;
+	while (line[j] == ' ')
+		j++;
+	if (!ft_isdigit(line[j]))
+		error("Error: forbidden co-ordinates");
+	y = ft_atoi(&line[j]);
+	v[i].pos.x = x;
+	v[i].pos.y = y;
+}
+
+void	parse_comment(char *line, int *ends, int *i)
+{
+	if (line[0] == '#' && line[1] == '#')
+	{
+		if (ft_strstr(line, "start") || ft_strstr(line, "end"))
+		{
+			(*ends)++;
+			i--;
+		}
+	}
+}
+
+void	store_vertex(t_vertex *v, char *line, int i)
+{
+	int j;
+
+	j = 0;
+	if (line[0] == 'L')
+		error("Error: Illegal name");
+	while (line[j] != ' ')
+		j++;
+	v[i].name = ft_strndup(line, j);
+	v[i].number = i;
+	v[i].children = NULL;
+	parse_coordinates(v, line, i, j);
+}
+
+char	*parse_vertex(t_vertex *v)
 {
 	char		*line;
-	int			start;
-	int 		end;
-	int			links;
+	int			ends;
 	int			i;
-	int			j;
-	int			x;
-	int			y;
-	// t_vertex	*v;
 
-	// v = *vertex;
 	i = 0;
-	start = 0;
-	end = 0;
-	links = 0;
+	ends = 0;
 	while (get_next_line(0, &line))
 	{
 		if (ft_strchr(line, '-'))
-		{
-			links = 1;
 			break ;
-		}
-		else if (line[0] == '#' && line[1] == '#' && ft_strstr(line, "start"))
-		{
-			start = 1;
-			i--;
-		}
-		else if (line[0] == '#' && line[1] == '#' && ft_strstr(line, "end"))
-		{
-			end = 1;
-			i--;
-		}
-		else if (line[0] != '#')
-		{
-			j = 0;
-			if (line[0] == 'L')
-				error("Error: Illegal name");
-			while (line[j] != ' ')
-				j++;
-			v[i].name = ft_strndup(line, j);
-			v[i].number = i;
-			v[i].children = NULL;
-
-			// saving co-ordinates
-			while (line[j] == ' ')
-				j++;
-			if (!ft_isdigit(line[j]))
-				error("Error: forbidden co-ordinates");
-			x = ft_atoi(&line[j]);
-			while (ft_isdigit(line[j]))
-				j++;
-			while (line[j] == ' ')
-				j++;
-			if (!ft_isdigit(line[j]))
-				error("Error: forbidden co-ordinates");
-			// printf("end: %s\n", &line[j]);
-			y = ft_atoi(&line[j]);
-			// printf("y: %d\n", y);
-			v[i].pos.x = x;
-			v[i].pos.y = y;
-			// printf("Here: %s, %d, %d\n", v[i].name, v[i].pos.x, v[i].pos.y);
-			// SETXY(v[i].pos, x, 0);
-			// printf("Here: %s, %d, %d\n", v[i].name, v[i].pos.x, v[i].pos.y);
-		}
+		else if (line[0] == '#')
+			parse_comment(line, &ends, &i);
+		else
+			store_vertex(v, line, i);
 		i++;
 		ft_putendl(line);
 		free(line);
 	}
 	if (!i)
 		error("Error: No rooms");
-	if (!start || !end)
+	if (ends < 2)
 		error("Error: No Start or End");
 	v[i].number = -1;
-	if (!links)
-		error("Error: No Links");
 	return (line);
+}
+
+void	store_link(t_vertex *v, char *line)
+{
+	char	**tmp;
+	int		x;
+	int		y;
+	int		j;
+
+	tmp = ft_strsplit(line, '-');
+	j = 0;
+	while (!ft_strequ(tmp[0], v[j].name))
+		j++;
+	x = j;
+	j = 0;
+	while (!ft_strequ(tmp[1], v[j].name))
+		j++;
+	y = j;
+	printf("x y: %d %d\n", x, y);
+	// add_edge(v, x ,y);
+	free(tmp[0]);
+	free(tmp[1]);
+	tmp = NULL;
+	ft_putendl(line);
+	free(line);
 }
 
 void	parse_links(t_vertex *v, char *line)
 {
-	int x = 0;
-	int y = 0;
-	int j = 0;
-	char **tmp;
-	if (line != NULL)
-	{
-		ft_putendl(line);
-		tmp = ft_strsplit(line, '-');
-		j = 0;
-		printf("tmp[0]: %s tmp[1]: %s\n", tmp[0], tmp[1]);
-		while (!ft_strequ(tmp[0], v[j].name))
-			j++;
-		x = j;
-		j = 0;
-		while (!ft_strequ(tmp[1], v[j].name))
-			j++;
-		y = j;
-		printf("x y: %d %d\n", x, y);
-		// add_edge(v, x ,y);
-		free(tmp[0]);
-		free(tmp[1]);
-		tmp = NULL;
-		free(line);
-	}
+	if (line == NULL)
+		error("Error: No Links");
+	store_link(v, line);
 	while (get_next_line(0, &line))
-	{
-		ft_putendl(line);
-		tmp = ft_strsplit(line, '-');
-		j = 0;
-		while (!ft_strequ(tmp[0], v[j].name))
-			j++;
-		x = j;
-		j = 0;
-		while (!ft_strequ(tmp[1], v[j].name))
-			j++;
-		y = j;
-		printf("x y: %d %d\n", x, y);
-		// add_edge(v, x ,y);
-		free(tmp[0]);
-		free(tmp[1]);
-		tmp = NULL;
-		free(line);
-	}
-	printf("exits\n");
+		store_link(v, line);
 }
 
 void	parse_input(t_ant *ants, t_vertex *v)
 {
 	char *line;
+
 	parse_ants(ants);
-	line = parse_rooms(v);
+	line = parse_vertex(v);
 	parse_links(v, line);
 }
 
@@ -172,7 +167,6 @@ void	ivan_test(void)
 		g.nodes[i].number = i;
 		g.nodes[i].children = NULL;
 	}
-	
 	add_edge(g, 0, 1);
 	add_edge(g, 0, 2);
 	add_edge(g, 0, 3);
