@@ -1,26 +1,12 @@
 #include "lem_in.h"
 #include "libft.h"
-
+#include "matrix.h"
 /*
 ** 2: NO_START, 3: NO_ROOM, 4: ILLEGAL_NAME, 5: NO_PATH, 6: INVALID_ROOM
 */
 
 void	error(const char *str)
 {
-	// if (i == 0)
-	// 	ft_putendl("Error : No or empty file");
-	// else if (i == 1)
-	// 	ft_putendl("Error : invalid ants format");
-	// else if (i == 2)
-	// 	ft_putendl("Error : no start or end");
-	// else if (i == 3)
-	// 	ft_putendl("Error : no rooms");
-	// else if (i == 4)
-	// 	ft_putendl("Error : Illegal name");
-	// else if (i == 5)
-	// 	ft_putendl("Error : no path");
-	// else if (i == 6)
-	// 	ft_putendl("Error : invalid room");
 	ft_putendl(str);
 	exit(1);
 }
@@ -40,19 +26,22 @@ void	parse_ants(t_ant *ants)
 	free(line);
 }
 
-// array of structs
-
 void	parse_rooms(t_vertex *v)
 {
-	char	*line;
-	int		start;
-	int 	end;
-	int		links;
-	int		i;
-	int		j;
+	char		*line;
+	int			start;
+	int 		end;
+	int			links;
+	int			i;
+	int			j;
+	t_matrix	matrix;
+	int			k;
+	int			l;
 
 	i = 0;
 	j = 0;
+	k = 0;
+	l = 0;
 	start = 0;
 	end = 0;
 	links = 0;
@@ -75,7 +64,7 @@ void	parse_rooms(t_vertex *v)
 			v[i].type = 2;
 			i--;
 		}
-		else
+		else if (line[0] != '#')
 		{
 			v[i].type = 0;
 			if (line[0] == 'L')
@@ -94,6 +83,26 @@ void	parse_rooms(t_vertex *v)
 		error("Error: No Start or End");
 	if (!links)
 		error("Error: No Links");
+	else
+	{
+		ft_putendl(line);
+		matrix.rows = i;
+		matrix.cols = i;
+		matrix.m = malloc(sizeof(int*) * i);
+		while (k < i)
+		{
+			matrix.m[k] = malloc(sizeof(int) * i);
+			while (l < i)
+			{
+				MTX_TOINT(matrix.m)[k][l] = 0;
+				l++;
+			}
+			l = 0;
+			k++;
+		}
+
+		print_matrix(&matrix, "int");
+	}
 }
 
 void	parse_input(t_ant *ants, t_vertex *v)

@@ -1,4 +1,5 @@
 #include "libft.h"
+#include "matrix.h"
 
 int		ft_isdigit_str(char *str)
 {
@@ -27,4 +28,31 @@ char	*ft_strndup(const char *s, size_t n)
 	}
 	res[i] = '\0';
 	return (res);
+}
+
+void	print_matrix(t_matrix *m, const char *type)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	ft_printf("Matrix: %d %d ---------\n", m->rows, m->cols);
+	while (++i < m->rows)
+	{
+		j = -1;
+		while (++j < m->cols)
+		{
+			if (ft_strequ(type, "int"))
+				ft_printf("%d ", MTX_TOINT(m->m)[i][j]);
+			else if (ft_strequ(type, "char"))
+				ft_printf("%d ", MTX_TOINT(m->m)[i][j]);
+			else
+			{
+				ft_printf("usage: type int or char");
+				return ;
+			}
+		}
+		ft_printf("\n");
+	}
+	ft_printf("---------------------\n");
 }
