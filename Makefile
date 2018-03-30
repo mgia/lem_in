@@ -6,7 +6,7 @@
 #    By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/28 20:11:50 by mtan              #+#    #+#              #
-#    Updated: 2018/03/29 19:39:23 by ikozlov          ###   ########.fr        #
+#    Updated: 2018/03/29 23:27:00 by ikozlov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,10 +42,9 @@ $(NAME): $(OBJ)
 	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
 	echo "[INFO] Lem-in executable created"
 
-$(OBJ): $(SRC)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INC_DIR)
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(FLAGS) $(INCLUDES) -c $^
-	@mv -f *.o $(OBJ_DIR)
+	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
