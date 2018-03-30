@@ -1,5 +1,5 @@
 #include "lem_in.h"
-#include "strings.h"
+#include "libft.h"
 
 void	error(const char *str)
 {
