@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mtan <marvin@42.fr>                        +#+  +:+       +#+         #
+#    By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/28 20:11:50 by mtan              #+#    #+#              #
-#    Updated: 2018/03/28 20:11:51 by mtan             ###   ########.fr        #
+#    Updated: 2018/03/29 19:39:23 by ikozlov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ NAME = lem-in
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 DEBUG = -g
+FLAGS += $(DEBUG)
 
 # directories
 OBJ_DIR = obj/
