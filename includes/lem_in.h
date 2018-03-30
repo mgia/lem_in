@@ -14,12 +14,8 @@
 # define LEM_IN_H
 
 # include "math.h"
-<<<<<<< HEAD
-# include "matrix.h"
-=======
 # include "list.h"
 
->>>>>>> 42585e41a7a0ebaaae9a92992ce6621020eace15
 # define NO_FILE 0
 # define NO_ANTS 1
 # define NO_EXITS 2
@@ -47,7 +43,6 @@ struct					s_vertex
 {
 	char				*name;
 	int					number;
-	int					type;
 	t_list				*children;
 	t_point				pos;
 };
@@ -59,7 +54,7 @@ typedef struct s_vertex	t_vertex;
 
 int		ft_isdigit_str(char *str);
 char	*ft_strndup(const char *s, int n);
-void	print_matrix(t_matrix *m, const char *type);
+// void	print_matrix(t_matrix *m, const char *type);
 
 void	add_edge(t_vertex *l, int p, int c);
 void	print_paths(t_vertex *g, int s, int e);
