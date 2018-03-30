@@ -1,9 +1,5 @@
 #include "lem_in.h"
 #include "libft.h"
-#include "matrix.h"
-/*
-** 2: NO_START, 3: NO_ROOM, 4: ILLEGAL_NAME, 5: NO_PATH, 6: INVALID_ROOM
-*/
 
 void	error(const char *str)
 {
@@ -26,7 +22,7 @@ void	parse_ants(t_ant *ants)
 	free(line);
 }
 
-void	parse_rooms(t_vertex *v)
+char	*parse_rooms(t_vertex *v)
 {
 	char		*line;
 	int			start;
@@ -34,14 +30,12 @@ void	parse_rooms(t_vertex *v)
 	int			links;
 	int			i;
 	int			j;
-	t_matrix	matrix;
-	int			k;
-	int			l;
+	int			x;
+	int			y;
+	// t_vertex	*v;
 
+	// v = *vertex;
 	i = 0;
-	j = 0;
-	k = 0;
-	l = 0;
 	start = 0;
 	end = 0;
 	links = 0;
@@ -55,23 +49,44 @@ void	parse_rooms(t_vertex *v)
 		else if (line[0] == '#' && line[1] == '#' && ft_strstr(line, "start"))
 		{
 			start = 1;
-			v[i].type = 1;
 			i--;
 		}
 		else if (line[0] == '#' && line[1] == '#' && ft_strstr(line, "end"))
 		{
 			end = 1;
-			v[i].type = 2;
 			i--;
 		}
 		else if (line[0] != '#')
 		{
-			v[i].type = 0;
+			j = 0;
 			if (line[0] == 'L')
 				error("Error: Illegal name");
 			while (line[j] != ' ')
 				j++;
 			v[i].name = ft_strndup(line, j);
+			v[i].number = i;
+			v[i].children = NULL;
+
+			// saving co-ordinates
+			while (line[j] == ' ')
+				j++;
+			if (!ft_isdigit(line[j]))
+				error("Error: forbidden co-ordinates");
+			x = ft_atoi(&line[j]);
+			while (ft_isdigit(line[j]))
+				j++;
+			while (line[j] == ' ')
+				j++;
+			if (!ft_isdigit(line[j]))
+				error("Error: forbidden co-ordinates");
+			// printf("end: %s\n", &line[j]);
+			y = ft_atoi(&line[j]);
+			// printf("y: %d\n", y);
+			v[i].pos.x = x;
+			v[i].pos.y = y;
+			// printf("Here: %s, %d, %d\n", v[i].name, v[i].pos.x, v[i].pos.y);
+			// SETXY(v[i].pos, x, 0);
+			// printf("Here: %s, %d, %d\n", v[i].name, v[i].pos.x, v[i].pos.y);
 		}
 		i++;
 		ft_putendl(line);
@@ -81,34 +96,66 @@ void	parse_rooms(t_vertex *v)
 		error("Error: No rooms");
 	if (!start || !end)
 		error("Error: No Start or End");
+	v[i].number = -1;
 	if (!links)
 		error("Error: No Links");
-	else
+	return (line);
+}
+
+void	parse_links(t_vertex *v, char *line)
+{
+	int x = 0;
+	int y = 0;
+	int j = 0;
+	char **tmp;
+	if (line != NULL)
 	{
 		ft_putendl(line);
-		matrix.rows = i;
-		matrix.cols = i;
-		matrix.m = malloc(sizeof(int*) * i);
-		while (k < i)
-		{
-			matrix.m[k] = malloc(sizeof(int) * i);
-			while (l < i)
-			{
-				MTX_TOINT(matrix.m)[k][l] = 0;
-				l++;
-			}
-			l = 0;
-			k++;
-		}
-
-		print_matrix(&matrix, "int");
+		tmp = ft_strsplit(line, '-');
+		j = 0;
+		printf("tmp[0]: %s tmp[1]: %s\n", tmp[0], tmp[1]);
+		while (!ft_strequ(tmp[0], v[j].name))
+			j++;
+		x = j;
+		j = 0;
+		while (!ft_strequ(tmp[1], v[j].name))
+			j++;
+		y = j;
+		printf("x y: %d %d\n", x, y);
+		// add_edge(v, x ,y);
+		free(tmp[0]);
+		free(tmp[1]);
+		tmp = NULL;
+		free(line);
 	}
+	while (get_next_line(0, &line))
+	{
+		ft_putendl(line);
+		tmp = ft_strsplit(line, '-');
+		j = 0;
+		while (!ft_strequ(tmp[0], v[j].name))
+			j++;
+		x = j;
+		j = 0;
+		while (!ft_strequ(tmp[1], v[j].name))
+			j++;
+		y = j;
+		printf("x y: %d %d\n", x, y);
+		// add_edge(v, x ,y);
+		free(tmp[0]);
+		free(tmp[1]);
+		tmp = NULL;
+		free(line);
+	}
+	printf("exits\n");
 }
 
 void	parse_input(t_ant *ants, t_vertex *v)
 {
+	char *line;
 	parse_ants(ants);
-	parse_rooms(v);
+	line = parse_rooms(v);
+	parse_links(v, line);
 }
 
 void	ivan_test(void)
