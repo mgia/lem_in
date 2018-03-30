@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:00:21 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/29 18:51:27 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/29 21:38:41 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,9 @@ int		ft_isdigit_str(char *str);
 char	*ft_strndup(const char *s, int n);
 // void	print_matrix(t_matrix *m, const char *type);
 
-// void	print_paths(t_vertex *g, int s, int e);
-
-void	add_edge(t_vertex *l, int p, int c);
-size_t	ft_graphlen(t_vertex *g);
-
 void	print_int_arr(int *a, int size);
 int		is_in_arr(int *a, int size, int el);
-t_list	*find_paths_rec(t_vertex c, t_vertex e, int *p, int p_ind);
-t_list	*find_paths(t_vertex *g, int s, int e);
+void	add_edge(t_graph g, int p, int c);
+t_list	*find_paths(t_graph g, int s, int e);
 
 #endif
