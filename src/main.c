@@ -111,11 +111,33 @@ void	parse_input(t_ant *ants, t_vertex *v)
 	parse_rooms(v);
 }
 
+void	ivan_test(void)
+{
+	t_vertex	g[5];
+	int			i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		g[i].number = i;
+		g[i].children = NULL;
+	}
+	g[4].number = -1;
+	add_edge(g, 0, 1);
+	add_edge(g, 0, 2);
+	add_edge(g, 0, 3);
+	add_edge(g, 2, 0);
+	add_edge(g, 2, 1);
+	add_edge(g, 1, 3);
+	print_paths(g, 2, 3);
+}
+
 int		main(void)
 {
 	t_ant		ants;
 	t_vertex	v[42];
 
 	parse_input(&ants, v);
+	// ivan_test();
 	return (0);
 }
