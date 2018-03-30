@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:00:21 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/29 21:38:41 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/29 22:24:45 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char	*ft_strndup(const char *s, int n);
 void	print_matrix(t_matrix *m, const char *type);
 
 void	add_edge(t_graph g, int p, int c);
+void	free_graph(t_graph g);
 t_list	*find_paths(t_graph g, int s, int e);
 
 #endif

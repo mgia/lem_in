@@ -25,4 +25,19 @@ void	add_edge(t_graph g, int p, int c)
 		l[p].children = child;
 	else
 		ft_lstadd(&l[p].children, child);
+
+void	free_vertex(t_vertex v)
+{
+	free(v.children);
+}
+
+void	free_graph(t_graph g)
+{
+	int		i;
+
+	i = -1;
+	while (++i < g.V)
+		if (g.nodes[i].children)
+			ft_lstdel(&g.nodes[i].children, ft_save_content);
+	ft_memdel((void **)&g.nodes);
 }
