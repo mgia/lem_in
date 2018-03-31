@@ -17,6 +17,10 @@
 # include "list.h"
 # include "matrix.h"
 
+# define REGULAR 0
+# define START 1
+# define END 2
+
 /*
 ** Structures
 */
@@ -25,6 +29,8 @@ struct					s_vertex
 {
 	char				*name;
 	int					number;
+	int					ants;
+	int					type;
 	t_list				*children;
 	t_point				pos;
 };
