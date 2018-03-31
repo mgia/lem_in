@@ -41,6 +41,8 @@ struct					s_ant
 {
 	int					number;
 	char				*location;
+	int					progress;
+	int					*path;	
 };
 typedef struct s_ant	t_ant;
 
