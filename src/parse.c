@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse1.c                                           :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/30 11:35:12 by mtan              #+#    #+#             */
-/*   Updated: 2018/03/30 11:35:13 by mtan             ###   ########.fr       */
+/*   Created: 2018/03/31 14:11:16 by mtan              #+#    #+#             */
+/*   Updated: 2018/03/31 14:11:25 by mtan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*parse_vertex(t_vertex *v, int *i)
 	return (line);
 }
 
-void	parse_links(t_graph g, t_vertex *v, char *line)
+void	parse_links(t_graph *g, t_vertex *v, char *line)
 {
 	if (line == NULL)
 		error("Error: No Links");
@@ -64,25 +64,47 @@ void	parse_links(t_graph g, t_vertex *v, char *line)
 		store_link(g, v, line);
 }
 
-t_list	*parse_input(t_ant *ants, t_vertex *v)
+void	store_link(t_graph *g, t_vertex *v, char *line)
+{
+	char	**tmp;
+	int		x;
+	int		y;
+	int		j;
+
+	tmp = ft_strsplit(line, '-');
+	j = 0;
+	while (!ft_strequ(tmp[0], v[j].name))
+		j++;
+	x = j;
+	j = 0;
+	while (!ft_strequ(tmp[1], v[j].name))
+		j++;
+	y = j;
+	ft_putendl(line);
+	add_edge(g, x, y);
+	free(tmp[0]);
+	free(tmp[1]);
+	free(tmp);
+	free(line);
+}
+
+t_list	*parse_input(t_ant *ants, t_vertex *v, t_graph *g)
 {
 	char		*line;
 	t_list		*p;
-	t_graph		g;
 	int			i;
 
 	parse_ants(ants);
 	line = parse_vertex(v, &i);
-	g.V = i;
-	g.nodes = malloc(sizeof(t_vertex) * g.V);
+	g->V = i;
+	g->nodes = malloc(sizeof(t_vertex) * g->V);
 	i = -1;
-	while (++i < g.V)
+	while (++i < g->V)
 	{
-		g.nodes[i].number = i;
-		g.nodes[i].children = NULL;
+		g->nodes[i].number = i;
+		g->nodes[i].children = NULL;
 	}
 	parse_links(g, v, line);
-	p = find_paths(g, 2, 3);
-	free_graph(g);
+	p = find_paths(*g, 2, 3);
 	return (p);
 }

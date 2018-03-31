@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 10:56:53 by mtan              #+#    #+#             */
-/*   Updated: 2018/03/31 18:07:14 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 18:13:13 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,15 @@ void	ivan_test(void)
 
 int		main(void)
 {
-	// t_ant		ants;
-	// t_vertex	v[42];
-	// t_list		*p;
-	// t_list		*head;
+	t_ant		ants;
+	t_vertex	v[42];
+	t_graph		g;
+	t_list		*p;
 
-	// // g = NULL;
-	// p = parse_input(&ants, v);
-	// head = p;
-	// while (p)
-	// {
-	// 	print_int_arr(p->content, p->content_size / 4);
-	// 	p = p->next;
-	// }
-	// ft_lstdel(&head, ft_free_content);
-	// // can still access names via v t_vertex after freeing graph
-	// ft_printf("%s\n", v[0].name);
-	// ft_printf("%s\n", v[1].name);
-	// ft_printf("%s\n", v[2].name);
-	// ft_printf("%s\n", v[3].name);
-	ivan_test();
+	p = parse_input(&ants, v, &g);
+	printf("what %p\n", &g);
+	print_paths(p);
+	print_names(v, g);
+	free_all(p, &g);
 	return (0);
 }
