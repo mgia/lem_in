@@ -6,12 +6,13 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 12:33:02 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/31 14:15:32 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 16:49:23 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "list.h"
+#include "ft_printf.h"
 
 size_t	int_tab_ind(int *a, size_t size, int el)
 {
@@ -65,18 +66,26 @@ int		turn(t_graph g, t_ant *ants, int ant_count)
 void	set_maps(t_list *paths, t_ant *ants, int ant_c)
 {
 	int		i;
+	int		len;
+	int		shortest;
 	t_list	*head;
 
 	i = 0;
+	shortest = paths->content_size / sizeof(int);
 	while (i != ant_c)
 	{
 		head = paths;
 		while (paths && i != ant_c)
 		{
-			ants[i].path = (int *)paths->content;
-			if (ant_c - i < (int)(paths->content_size / sizeof(int)))
+			len = (int)paths->content_size / sizeof(int);
+			if (len == shortest || ant_c - i <= len)
+			{
+				ants[i].path = paths->content;
 				paths = paths->next;
-			i++;
+				i++;
+			}
+			else
+				break ;
 		}
 		paths = head;
 	}
