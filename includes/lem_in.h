@@ -48,14 +48,16 @@ typedef struct s_ant	t_ant;
 ** Parsers
 */
 
-void	parse_input(t_ant *ants, t_vertex *v);
+t_list	*parse_input(t_ant *ants, t_vertex *v);
 void	parse_ants(t_ant *ants);
-char	*parse_vertex(t_vertex *v);
+char	*parse_vertex(t_vertex *v, int *i);
+void	store_vertex(t_vertex *v, char *line, int i);
 void	parse_coordinates(t_vertex *v, char *line, int i, int j);
 void	parse_comment(char *line, int *ends, int *i);
-void	parse_links(t_vertex *v, char *line);
-void	store_vertex(t_vertex *v, char *line, int i);
-void	store_link(t_vertex *v, char *line);
+
+
+void	parse_links(t_graph g, t_vertex *v, char *line);
+void	store_link(t_graph g, t_vertex *v, char *line);
 
 /*
 ** IVAN: Rename title
