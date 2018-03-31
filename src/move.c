@@ -78,7 +78,7 @@ void	set_maps(t_list *paths, t_ant *ants, int ant_c)
 		while (paths && i != ant_c)
 		{
 			len = (int)paths->content_size / sizeof(int);
-			if (len == shortest || ant_c - i <= len)
+			if (len == shortest || ant_c - i >= len)
 			{
 				ants[i].path = paths->content;
 				paths = paths->next;
