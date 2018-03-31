@@ -26,10 +26,10 @@ size_t	int_tab_ind(int *a, size_t size, int el)
 
 int		can_move(t_graph g, t_ant ant)
 {
-	t_vertex	current;
+	t_vertex	next;
 
-	current = g.nodes[ant.path[ant.progress + 1]];
-	if (current.type == END || current.ants == 0)
+	next = g.nodes[ant.path[ant.progress + 1]];
+	if (next.type == END || next.ants == 0)
 		return (1);
 	return (0);
 }
