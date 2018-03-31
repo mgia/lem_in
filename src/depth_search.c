@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 19:44:40 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/29 23:34:51 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/30 11:43:20 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_list	*find_paths_rec(t_vertex c, t_vertex e, int *p, int p_ind)
 				if (buf && !res)
 					res = buf;
 				else if (buf && res)
-					ft_lstaddlst(&res, buf);
+					ft_lstaddback(&res, buf);
 			}
 			kids = kids->next;
 		}
