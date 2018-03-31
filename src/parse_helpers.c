@@ -71,22 +71,16 @@ void	store_link(t_graph g, t_vertex *v, char *line)
 	tmp = ft_strsplit(line, '-');
 	j = 0;
 	while (!ft_strequ(tmp[0], v[j].name))
-	// while ((ft_atoi(tmp[0]) != v[j].number))
-
 		j++;
 	x = j;
 	j = 0;
 	while (!ft_strequ(tmp[1], v[j].name))
-	// while ((ft_atoi(tmp[1]) != v[j].number))
 		j++;
 	y = j;
 	ft_putendl(line);
-	// ft_printf("x y: %d %d\n", x, y);
 	add_edge(g, x, y);
 	free(tmp[0]);
 	free(tmp[1]);
 	free(tmp);
 	free(line);
 }
-
-//give ant map, give ant path, move ant to exit

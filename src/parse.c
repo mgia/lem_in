@@ -64,29 +64,15 @@ void	parse_links(t_graph g, t_vertex *v, char *line)
 		store_link(g, v, line);
 }
 
-// void	initialize_graph(t_graph g, int i)
-// {
-// 	g.V = i;
-// 	g.nodes = malloc(sizeof(t_vertex) * g.V);
-// 	i = -1;
-// 	while (++i < g.V)
-// 	{
-// 		g.nodes[i].number = i;
-// 		g.nodes[i].children = NULL;
-// 	}
-// }
-
 t_list	*parse_input(t_ant *ants, t_vertex *v)
 {
 	char		*line;
-	t_graph		g;
 	t_list		*p;
-	t_list		*head;
+	t_graph		g;
 	int			i;
 
 	parse_ants(ants);
 	line = parse_vertex(v, &i);
-	// initialize_graph(g, i);
 	g.V = i;
 	g.nodes = malloc(sizeof(t_vertex) * g.V);
 	i = -1;
@@ -97,13 +83,6 @@ t_list	*parse_input(t_ant *ants, t_vertex *v)
 	}
 	parse_links(g, v, line);
 	p = find_paths(g, 2, 3);
-	head = p;
-	while (p)
-	{
-		print_int_arr(p->content, p->content_size / 4);
-		p = p->next;
-	}
 	free_graph(g);
-	ft_lstdel(&head, ft_free_content);
 	return (p);
 }
