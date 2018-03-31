@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:00:21 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/29 22:24:45 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 13:52:33 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int		is_in_arr(int *a, int size, int el);
 void	add_edge(t_graph g, int p, int c);
 void	free_graph(t_graph g);
 t_list	*find_paths(t_graph g, int s, int e);
+void	move_ants(t_graph g, t_list *paths, t_ant *ants, int ant_count);
 
 /*
 ** Helpers
