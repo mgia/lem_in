@@ -56,16 +56,14 @@ typedef struct s_ant	t_ant;
 ** Parsers
 */
 
-t_list	*parse_input(t_ant *ants, t_vertex *v);
 void	parse_ants(t_ant *ants);
 char	*parse_vertex(t_vertex *v, int *i);
-void	store_vertex(t_vertex *v, char *line, int i);
+void	parse_links(t_graph *g, t_vertex *v, char *line);
+void	store_link(t_graph *g, t_vertex *v, char *line);
+t_list	*parse_input(t_ant *ants, t_vertex *v, t_graph *g);
 void	parse_coordinates(t_vertex *v, char *line, int i, int j);
 void	parse_comment(char *line, int *ends, int *i);
-
-
-void	parse_links(t_graph g, t_vertex *v, char *line);
-void	store_link(t_graph g, t_vertex *v, char *line);
+void	store_vertex(t_vertex *v, char *line, int i);
 
 /*
 ** IVAN: Rename title
@@ -73,8 +71,8 @@ void	store_link(t_graph g, t_vertex *v, char *line);
 
 void	print_int_arr(int *a, int size);
 int		is_in_arr(int *a, int size, int el);
-void	add_edge(t_graph g, int p, int c);
-void	free_graph(t_graph g);
+void	add_edge(t_graph *g, int p, int c);
+// void	free_graph(t_graph g);
 t_list	*find_paths(t_graph g, int s, int e);
 void	move_ants(t_graph g, t_list *paths, t_ant *ants, int ant_count);
 
@@ -83,6 +81,10 @@ void	move_ants(t_graph g, t_list *paths, t_ant *ants, int ant_count);
 */
 
 void	error(const char *str);
+void	free_graph(t_graph *g);
+void	free_all(t_list *p, t_graph *g);
+void	print_paths(t_list *p);
+void	print_names(t_vertex *v, t_graph g);
 
 /*
 ** Libft Additional Functions
