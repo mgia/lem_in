@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:00:21 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/31 13:52:33 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 16:58:19 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ struct					s_ant
 	int					number;
 	char				*location;
 	int					progress;
-	int					*path;	
+	int					*path;
 };
 typedef struct s_ant	t_ant;
 
