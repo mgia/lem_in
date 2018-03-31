@@ -75,6 +75,6 @@ t_list	*find_paths(t_graph g, int s, int e)
 	paths = find_paths_rec(g.nodes[s], g.nodes[e], path, 0);
 	free(path);
 	if (!paths)
-		printf("Error: No Path\n");
+		error("Error: No Path");
 	return (paths);
 }
