@@ -17,6 +17,8 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 DEBUG = -g
 FLAGS += $(DEBUG)
+ASAN = -fsanitize=address
+# DEBUG += $(ASAN)
 
 # directories
 OBJ_DIR = obj/
@@ -44,7 +46,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INC_DIR)
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean

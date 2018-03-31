@@ -20,6 +20,7 @@ void	add_edge(t_graph g, int p, int c)
 	t_vertex	*l;
 	t_list		*child;
 
+
 	l = g.nodes;
 	child = NULL;
 	child = ft_lstnew(NULL, 0);
@@ -32,10 +33,13 @@ void	add_edge(t_graph g, int p, int c)
 	c++;
 }
 
-void	free_vertex(t_vertex v)
-{
-	free(v.children);
-}
+// void	free_vertex(t_vertex v)
+// {
+// 	if (v.children)
+// 		free(v.children);
+// 	if (v.name)
+// 		free(v.name);
+// }
 
 void	free_graph(t_graph g)
 {
@@ -43,7 +47,11 @@ void	free_graph(t_graph g)
 
 	i = -1;
 	while (++i < g.V)
+	{
 		if (g.nodes[i].children)
 			ft_lstdel(&g.nodes[i].children, ft_save_content);
+		// if (g.nodes[i].name)
+			// free(g.nodes[i].name);
+	}
 	ft_memdel((void **)&g.nodes);
 }

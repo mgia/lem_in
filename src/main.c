@@ -43,16 +43,21 @@ int		main(void)
 	t_ant		ants;
 	t_vertex	v[42];
 	t_list		*p;
-	// t_list		*head;
+	t_list		*head;
 
+	// g = NULL;
 	p = parse_input(&ants, v);
-	// head = p;
-
-	ft_lstdel(&p, ft_free_content);
-	// int i = -1;
-	// while (++i < 4)
-		// ft_printf("child of [%d]: %s %p\n", i, v[i].name, v[i].children);
-	while (1)
-		;
+	head = p;
+	while (p)
+	{
+		print_int_arr(p->content, p->content_size / 4);
+		p = p->next;
+	}
+	ft_lstdel(&head, ft_free_content);
+	// can still access names via v t_vertex after freeing graph
+	ft_printf("%s\n", v[0].name);
+	ft_printf("%s\n", v[1].name);
+	ft_printf("%s\n", v[2].name);
+	ft_printf("%s\n", v[3].name);
 	return (0);
 }
