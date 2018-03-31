@@ -41,7 +41,7 @@ void	parse_comment(char *line, int *ends, int *i)
 		if (ft_strstr(line, "start") || ft_strstr(line, "end"))
 		{
 			(*ends)++;
-			i--;
+			(*i)--;
 		}
 	}
 }
@@ -61,7 +61,7 @@ void	store_vertex(t_vertex *v, char *line, int i)
 	parse_coordinates(v, line, i, j);
 }
 
-void	store_link(t_vertex *v, char *line)
+void	store_link(t_graph g, t_vertex *v, char *line)
 {
 	char	**tmp;
 	int		x;
@@ -71,17 +71,22 @@ void	store_link(t_vertex *v, char *line)
 	tmp = ft_strsplit(line, '-');
 	j = 0;
 	while (!ft_strequ(tmp[0], v[j].name))
+	// while ((ft_atoi(tmp[0]) != v[j].number))
+
 		j++;
 	x = j;
 	j = 0;
 	while (!ft_strequ(tmp[1], v[j].name))
+	// while ((ft_atoi(tmp[1]) != v[j].number))
 		j++;
 	y = j;
-	printf("x y: %d %d\n", x, y);
-	// add_edge(v, x ,y);
+	ft_putendl(line);
+	// ft_printf("x y: %d %d\n", x, y);
+	add_edge(g, x, y);
 	free(tmp[0]);
 	free(tmp[1]);
-	tmp = NULL;
-	ft_putendl(line);
+	free(tmp);
 	free(line);
 }
+
+//give ant map, give ant path, move ant to exit

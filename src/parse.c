@@ -28,48 +28,82 @@ void	parse_ants(t_ant *ants)
 	free(line);
 }
 
-char	*parse_vertex(t_vertex *v)
+char	*parse_vertex(t_vertex *v, int *i)
 {
 	char		*line;
 	int			ends;
-	int			i;
 
-	i = 0;
+	*i = 0;
 	ends = 0;
 	while (get_next_line(0, &line))
 	{
 		if (ft_strchr(line, '-'))
 			break ;
 		else if (line[0] == '#')
-			parse_comment(line, &ends, &i);
+			parse_comment(line, &ends, i);
 		else
-			store_vertex(v, line, i);
-		i++;
+			store_vertex(v, line, *i);
+		(*i)++;
 		ft_putendl(line);
 		free(line);
 	}
-	if (!i)
+	if (!*i)
 		error("Error: No rooms");
 	if (ends < 2)
 		error("Error: No Start or End");
-	v[i].number = -1;
+	v[*i].number = -1;
 	return (line);
 }
 
-void	parse_links(t_vertex *v, char *line)
+void	parse_links(t_graph g, t_vertex *v, char *line)
 {
 	if (line == NULL)
 		error("Error: No Links");
-	store_link(v, line);
+	store_link(g, v, line);
 	while (get_next_line(0, &line))
-		store_link(v, line);
+		store_link(g, v, line);
 }
 
-void	parse_input(t_ant *ants, t_vertex *v)
+// void	initialize_graph(t_graph g, int i)
+// {
+// 	g.V = i;
+// 	g.nodes = malloc(sizeof(t_vertex) * g.V);
+// 	i = -1;
+// 	while (++i < g.V)
+// 	{
+// 		g.nodes[i].number = i;
+// 		g.nodes[i].children = NULL;
+// 	}
+// }
+
+t_list	*parse_input(t_ant *ants, t_vertex *v)
 {
-	char *line;
+	char		*line;
+	t_graph		g;
+	t_list		*p;
+	t_list		*head;
+	int			i;
 
 	parse_ants(ants);
-	line = parse_vertex(v);
-	parse_links(v, line);
+	line = parse_vertex(v, &i);
+	// initialize_graph(g, i);
+	g.V = i;
+	g.nodes = malloc(sizeof(t_vertex) * g.V);
+	i = -1;
+	while (++i < g.V)
+	{
+		g.nodes[i].number = i;
+		g.nodes[i].children = NULL;
+	}
+	parse_links(g, v, line);
+	p = find_paths(g, 2, 3);
+	head = p;
+	while (p)
+	{
+		print_int_arr(p->content, p->content_size / 4);
+		p = p->next;
+	}
+	free_graph(g);
+	ft_lstdel(&head, ft_free_content);
+	return (p);
 }
