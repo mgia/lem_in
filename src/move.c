@@ -38,18 +38,26 @@ int		turn(t_graph g, t_ant *ants, int ant_count)
 {
 	int		i;
 	int		ant_at_end;
+	int		need_space;
 
 	ant_at_end = 0;
 	while (ant_at_end != ant_count)
 	{
+		need_space = 0;
 		i = ant_at_end - 1;
 		while (++i < ant_count)
 		{
 			if (ants[i].path != NULL && can_move(g, ants[i]))
+			{
 				ants[i].progress++;
+				ft_printf("%sL%d-%d", need_space == 1 ? " " : "",
+					i, g.nodes[ants[i].path[ants[i].progress]].number);
+				need_space = 1;
+			}
 			if (g.nodes[ants[i].path[ants[i].progress]].type == END)
 				ant_at_end++;
 		}
+		ft_printf("\n");
 	}
 	return (1);
 }
