@@ -60,27 +60,3 @@ void	store_vertex(t_vertex *v, char *line, int i)
 	v[i].children = NULL;
 	parse_coordinates(v, line, i, j);
 }
-
-void	store_link(t_graph g, t_vertex *v, char *line)
-{
-	char	**tmp;
-	int		x;
-	int		y;
-	int		j;
-
-	tmp = ft_strsplit(line, '-');
-	j = 0;
-	while (!ft_strequ(tmp[0], v[j].name))
-		j++;
-	x = j;
-	j = 0;
-	while (!ft_strequ(tmp[1], v[j].name))
-		j++;
-	y = j;
-	ft_putendl(line);
-	add_edge(g, x, y);
-	free(tmp[0]);
-	free(tmp[1]);
-	free(tmp);
-	free(line);
-}
