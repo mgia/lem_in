@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 19:44:40 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/30 11:43:20 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 18:35:20 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,6 @@ void	print_int_arr(int *a, int size)
 	printf("\n");
 }
 
-int		is_in_arr(int *a, int size, int el)
-{
-	int		i;
-
-	i = -1;
-	while (++i < size)
-		if (a[i] == el)
-			return (1);
-	return (0);
-}
-
 t_list	*find_paths_rec(t_vertex c, t_vertex e, int *p, int p_ind)
 {
 	t_list		*kids;
@@ -53,7 +42,7 @@ t_list	*find_paths_rec(t_vertex c, t_vertex e, int *p, int p_ind)
 		while (kids)
 		{
 			kid = *(t_vertex *)kids->content;
-			if (!is_in_arr(p, p_ind, kid.number))
+			if (is_in_arr(p, p_ind, kid.number) < 0)
 			{
 				buf = find_paths_rec(kid, e, p, p_ind + 1);
 				if (buf && !res)
