@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtan <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 14:12:51 by mtan              #+#    #+#             */
-/*   Updated: 2018/03/31 14:12:52 by mtan             ###   ########.fr       */
+/*   Updated: 2018/03/31 23:25:11 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "libft.h"
+
+void	print_int_arr(int *a, int size)
+{
+	int		i;
+
+	i = -1;
+	while (++i < size)
+		ft_printf("%s%d", i == 0 ? "" : " ", a[i]);
+	ft_printf("\n");
+}
 
 void	error(const char *str)
 {
