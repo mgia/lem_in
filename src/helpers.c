@@ -33,10 +33,11 @@ void	free_graph(t_graph *g)
 	ft_memdel((void **)&g->nodes);
 }
 
-void	free_all(t_list *p, t_graph *g)
+void	free_all(t_list *p, t_graph *g, t_ant *ants)
 {
 	free_graph(g);
 	ft_lstdel(&p, ft_free_content);
+	free(ants);
 }
 
 void	print_paths(t_list *p)
