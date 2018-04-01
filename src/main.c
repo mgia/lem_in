@@ -6,12 +6,17 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 10:56:53 by mtan              #+#    #+#             */
-/*   Updated: 2018/03/31 16:47:59 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 18:07:14 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "libft.h"
+
+int		pathscmp(t_list *a, t_list *b)
+{
+	return ((int)(a->content_size - b->content_size));
+}
 
 void	ivan_test(void)
 {
