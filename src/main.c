@@ -6,17 +6,12 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 10:56:53 by mtan              #+#    #+#             */
-/*   Updated: 2018/03/31 18:18:32 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 18:40:33 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "libft.h"
-
-int		pathscmp(t_list *a, t_list *b)
-{
-	return ((int)(a->content_size - b->content_size));
-}
 
 void	ivan_test(void)
 {
@@ -43,8 +38,6 @@ void	ivan_test(void)
 	g.nodes[2].type = START;
 	g.nodes[3].type = END;
 	p = find_paths(g, 2, 3);
-	p->next->next->content_size = 2;
-	ft_lstsort(p, pathscmp);
 	ants = malloc(sizeof(t_ant) * 3);
 	i = -1;
 	while (++i < 3)
