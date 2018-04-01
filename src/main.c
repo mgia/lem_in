@@ -60,15 +60,13 @@ void	ivan_test(void)
 
 int		main(void)
 {
-	t_ant		ants;
-	t_vertex	v[42];
 	t_graph		g;
+	t_ant		*ants;
+	int			ant_count;
 	t_list		*p;
 
-	p = parse_input(&ants, v, &g);
-	printf("what %p\n", &g);
+	parse_input(&ants, &ant_count, &p, &g);
 	print_paths(p);
-	print_names(v, g);
-	free_all(p, &g);
+	free_all(p, &g, ants);
 	return (0);
 }

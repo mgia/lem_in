@@ -13,40 +13,26 @@
 #include "lem_in.h"
 #include "libft.h"
 
-void	parse_coordinates(t_vertex *v, char *line, int i, int j)
-{
-	int x;
-	int y;
-
-	while (line[j] == ' ')
-		j++;
-	if (!ft_isdigit(line[j]))
-		error("Error: forbidden co-ordinates");
-	x = ft_atoi(&line[j]);
-	while (ft_isdigit(line[j]))
-		j++;
-	while (line[j] == ' ')
-		j++;
-	if (!ft_isdigit(line[j]))
-		error("Error: forbidden co-ordinates");
-	y = ft_atoi(&line[j]);
-	v[i].pos.x = x;
-	v[i].pos.y = y;
-}
-
-void	parse_comment(char *line, int *ends, int *i)
+void		parse_comment(char *line, int *ends, int *i, t_vertex *v)
 {
 	if (line[0] == '#' && line[1] == '#')
 	{
-		if (ft_strstr(line, "start") || ft_strstr(line, "end"))
+		if (ft_strstr(line, "start"))
 		{
+			v[*i].type = START;
+			(*ends)++;
+			(*i)--;
+		}
+		else if (ft_strstr(line, "end"))
+		{
+			v[*i].type = END;
 			(*ends)++;
 			(*i)--;
 		}
 	}
 }
 
-void	store_vertex(t_vertex *v, char *line, int i)
+void		store_vertex(t_vertex *v, char *line, int i)
 {
 	int j;
 
@@ -58,5 +44,33 @@ void	store_vertex(t_vertex *v, char *line, int i)
 	v[i].name = ft_strndup(line, j);
 	v[i].number = i;
 	v[i].children = NULL;
-	parse_coordinates(v, line, i, j);
+}
+
+static void	free_reference(char **tmp)
+{
+	free(tmp[0]);
+	free(tmp[1]);
+	free(tmp);
+}
+
+void		store_link(t_graph *g, t_vertex *v, char *line)
+{
+	char	**tmp;
+	int		x;
+	int		y;
+	int		j;
+
+	tmp = ft_strsplit(line, '-');
+	j = 0;
+	while (!ft_strequ(tmp[0], v[j].name))
+		j++;
+	x = j;
+	j = 0;
+	while (!ft_strequ(tmp[1], v[j].name))
+		j++;
+	y = j;
+	ft_putendl(line);
+	add_edge(g, x, y);
+	free_reference(tmp);
+	free(line);
 }

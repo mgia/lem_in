@@ -13,17 +13,24 @@
 #include "lem_in.h"
 #include "libft.h"
 
-void	parse_ants(t_ant *ants)
+void	parse_ants(t_ant **ants, int *ant_count)
 {
 	char	*line;
 	int		i;
 
-	i = 0;
 	if (!get_next_line(0, &line))
 		error("Error: No File");
-	ants->number = ft_atoi(line);
-	if (!ft_isdigit_str(line) || ants->number <= 0)
+	*ant_count = ft_atoi(line);
+	if (!ft_isdigit_str(line) || *ant_count <= 0)
 		error("Error: No Ants");
+	*ants = malloc(sizeof(t_ant) * (*ant_count));
+	i = -1;
+	while (++i < *ant_count)
+	{
+		(*ants)[i].progress = 0;
+		(*ants)[i].path = NULL;
+		(*ants)[i].number = *ant_count;
+	}
 	ft_putendl(line);
 	free(line);
 }
@@ -40,7 +47,7 @@ char	*parse_vertex(t_vertex *v, int *i)
 		if (ft_strchr(line, '-'))
 			break ;
 		else if (line[0] == '#')
-			parse_comment(line, &ends, i);
+			parse_comment(line, &ends, i, v);
 		else
 			store_vertex(v, line, *i);
 		(*i)++;
@@ -51,7 +58,6 @@ char	*parse_vertex(t_vertex *v, int *i)
 		error("Error: No rooms");
 	if (ends < 2)
 		error("Error: No Start or End");
-	v[*i].number = -1;
 	return (line);
 }
 
@@ -64,47 +70,27 @@ void	parse_links(t_graph *g, t_vertex *v, char *line)
 		store_link(g, v, line);
 }
 
-void	store_link(t_graph *g, t_vertex *v, char *line)
+void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g)
 {
-	char	**tmp;
-	int		x;
-	int		y;
-	int		j;
-
-	tmp = ft_strsplit(line, '-');
-	j = 0;
-	while (!ft_strequ(tmp[0], v[j].name))
-		j++;
-	x = j;
-	j = 0;
-	while (!ft_strequ(tmp[1], v[j].name))
-		j++;
-	y = j;
-	ft_putendl(line);
-	add_edge(g, x, y);
-	free(tmp[0]);
-	free(tmp[1]);
-	free(tmp);
-	free(line);
-}
-
-t_list	*parse_input(t_ant *ants, t_vertex *v, t_graph *g)
-{
+	t_vertex	tmp[42];
 	char		*line;
-	t_list		*p;
 	int			i;
 
-	parse_ants(ants);
-	line = parse_vertex(v, &i);
+	parse_ants(ants, ant_count);
+	line = parse_vertex(tmp, &i);
 	g->V = i;
 	g->nodes = malloc(sizeof(t_vertex) * g->V);
 	i = -1;
 	while (++i < g->V)
 	{
 		g->nodes[i].number = i;
+		g->nodes[i].name = ft_strdup(tmp[i].name);
+		g->nodes[i].type = tmp[i].type ? tmp[i].type : 0;
 		g->nodes[i].children = NULL;
 	}
-	parse_links(g, v, line);
-	p = find_paths(*g, 2, 3);
-	return (p);
+	parse_links(g, tmp, line);
+	i = -1;
+	while (++i < g->V)
+		free(tmp[i].name);
+	*p = find_paths(*g, 2, 3);
 }
