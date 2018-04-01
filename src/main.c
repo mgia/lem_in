@@ -67,6 +67,6 @@ int		main(void)
 
 	parse_input(&ants, &ant_count, &p, &g);
 	print_paths(p);
-	free_all(p, &g, ants);
+	free_all(p, &g, ant);
 	return (0);
 }
