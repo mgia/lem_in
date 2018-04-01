@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 10:56:53 by mtan              #+#    #+#             */
-/*   Updated: 2018/03/31 18:40:33 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 23:26:55 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int		main(void)
 
 	parse_input(&ants, &ant_count, &p, &g);
 	print_paths(p);
-	free_all(p, &g, ant);
+	free_all(p, &g, ants);
 	return (0);
 }

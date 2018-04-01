@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 19:44:40 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/31 18:42:41 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 23:27:53 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_list	*find_paths(t_graph g, int s, int e)
 	path = ft_memalloc(g.V * sizeof(int));
 	paths = find_paths_rec(g.nodes[s], g.nodes[e], path, 0);
 	ft_lstsort(paths, pathscmp);
-	ft_memdel(&paths);
+	ft_memdel((void **)&path);
 	if (!paths)
 		error("Error: No Path");
 	return (paths);
