@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 10:56:53 by mtan              #+#    #+#             */
-/*   Updated: 2018/03/31 18:13:13 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 18:16:00 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	ivan_test(void)
 		g.nodes[i].children = NULL;
 		g.nodes[i].ants = 0;
 	}
-	add_edge(g, 0, 1);
-	add_edge(g, 0, 2);
-	add_edge(g, 0, 3);
-	add_edge(g, 2, 0);
-	add_edge(g, 2, 1);
-	add_edge(g, 1, 3);
+	add_edge(&g, 0, 1);
+	add_edge(&g, 0, 2);
+	add_edge(&g, 0, 3);
+	add_edge(&g, 2, 0);
+	add_edge(&g, 2, 1);
+	add_edge(&g, 1, 3);
 	g.nodes[2].type = START;
 	g.nodes[3].type = END;
 	p = find_paths(g, 2, 3);
@@ -55,7 +55,7 @@ void	ivan_test(void)
 	}
 	move_ants(g, p, ants, 3);
 	ft_lstdel(&p, ft_free_content);
-	free_graph(g);
+	free_graph(&g);
 }
 
 int		main(void)
