@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 19:44:40 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/31 18:36:14 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 18:40:20 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include "lem_in.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+int		pathscmp(t_list *a, t_list *b)
+{
+	return ((int)(a->content_size - b->content_size));
+}
 
 void	print_int_arr(int *a, int size)
 {
@@ -63,6 +68,7 @@ t_list	*find_paths(t_graph g, int s, int e)
 
 	path = ft_memalloc(g.V * sizeof(int));
 	paths = find_paths_rec(g.nodes[s], g.nodes[e], path, 0);
+	ft_lstsort(paths, pathscmp);
 	free(path);
 	if (!paths)
 		error("Error: No Path");
