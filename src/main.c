@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 10:56:53 by mtan              #+#    #+#             */
-/*   Updated: 2018/03/31 14:31:56 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 16:47:59 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,15 @@ void	ivan_test(void)
 	g.nodes[2].type = START;
 	g.nodes[3].type = END;
 	p = find_paths(g, 2, 3);
-	ants = malloc(sizeof(t_ant));
-	ants->progress = -1;
-	ants->path = NULL;
-	ants->number = 1;
-	move_ants(g, p, ants, 1);
+	ants = malloc(sizeof(t_ant) * 3);
+	i = -1;
+	while (++i < 3)
+	{
+		ants[i].progress = 0;
+		ants[i].path = NULL;
+		ants[i].number = 1;
+	}
+	move_ants(g, p, ants, 3);
 	ft_lstdel(&p, ft_free_content);
 	free_graph(g);
 }
