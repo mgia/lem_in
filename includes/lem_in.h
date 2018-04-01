@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:00:21 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/31 16:58:19 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 18:44:09 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,10 @@ void	parse_comment(char *line, int *ends, int *i);
 void	store_vertex(t_vertex *v, char *line, int i);
 
 /*
-** IVAN: Rename title
+** Algorithm
 */
 
-void	print_int_arr(int *a, int size);
-int		is_in_arr(int *a, int size, int el);
 void	add_edge(t_graph *g, int p, int c);
-// void	free_graph(t_graph g);
 t_list	*find_paths(t_graph g, int s, int e);
 void	move_ants(t_graph g, t_list *paths, t_ant *ants, int ant_count);
 
