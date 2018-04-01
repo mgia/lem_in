@@ -6,12 +6,13 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 19:44:40 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/31 18:35:20 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/03/31 18:36:14 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include "memory.h"
+#include "numbers.h"
 #include "lem_in.h"
 #include <stdio.h>
 #include <stdlib.h>
