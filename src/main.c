@@ -43,6 +43,8 @@ void	ivan_test(void)
 	g.nodes[2].type = START;
 	g.nodes[3].type = END;
 	p = find_paths(g, 2, 3);
+	p->next->next->content_size = 2;
+	ft_lstsort(p, pathscmp);
 	ants = malloc(sizeof(t_ant) * 3);
 	i = -1;
 	while (++i < 3)
