@@ -20,6 +20,8 @@ void	parse_ants(t_ant **ants, int *ant_count)
 
 	if (!get_next_line(0, &line))
 		error("Error: No File");
+	if (!line)
+		error("Error: Empty File");
 	while (line[0] == '#')
 	{
 		ft_putendl(line);
@@ -59,7 +61,10 @@ char	*parse_vertex(t_vertex *v, int *i)
 		(*i)++;
 		ft_putendl(line);
 		free(line);
+		line = NULL;
 	}
+	if (!line)
+		printf("Error: No links");
 	if (!*i)
 		error("Error: No rooms");
 	if (ends < 2)
@@ -86,7 +91,7 @@ void	parse_links(t_graph *g, t_vertex *v, char *line)
 
 void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g)
 {
-	t_vertex	tmp[42];
+	t_vertex	tmp[10000];
 	char		*line;
 	int			i;
 	int			start;
@@ -97,6 +102,7 @@ void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g)
 	g->V = i;
 	g->nodes = malloc(sizeof(t_vertex) * g->V);
 	i = -1;
+	error("Cut");
 	while (++i < g->V)
 	{
 		g->nodes[i].number = i;
@@ -110,5 +116,6 @@ void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g)
 	i = -1;
 	while (++i < g->V)
 		free(tmp[i].name);
-	*p = find_paths(*g, start, end);
+	// *p = find_paths(*g, start, end);
+	*p = NULL;
 }

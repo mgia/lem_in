@@ -15,21 +15,15 @@
 
 void		parse_comment(char *line, int *ends, int *i, t_vertex *v)
 {
-	if (line[0] == '#' && line[1] == '#')
+	if (line[1] == '#')
 	{
+		(*ends)++;
 		if (ft_strstr(line, "start"))
-		{
 			v[*i].type = START;
-			(*ends)++;
-			(*i)--;
-		}
 		else if (ft_strstr(line, "end"))
-		{
 			v[*i].type = END;
-			(*ends)++;
-			(*i)--;
-		}
 	}
+	(*i)--;
 }
 
 void		store_vertex(t_vertex *v, char *line, int i)
