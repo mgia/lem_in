@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:00:21 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/31 18:44:09 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/02 15:06:52 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 # define REGULAR 0
 # define START 1
 # define END 2
+
+/*
+**	Part Of Shortest Path
+*/
+
+# define POSP 3
 
 /*
 ** Structures
