@@ -112,7 +112,7 @@ void	set_maps(t_graph g, t_list *paths, t_ant *ants, int ant_c)
 
 void	move_ants(t_graph g, t_list *paths, t_ant *ants, int ant_count)
 {
-	set_maps(paths, ants, ant_count);
+	set_short_paths_rooms(g, paths);
+	set_maps(g, paths, ants, ant_count);
 	turn(g, ants, ant_count);
-	return ;
 }
