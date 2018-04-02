@@ -81,7 +81,7 @@ int		turn(t_graph g, t_ant *ants, int ant_count)
 	return (1);
 }
 
-void	set_maps(t_list *paths, t_ant *ants, int ant_c)
+void	set_maps(t_graph g, t_list *paths, t_ant *ants, int ant_c)
 {
 	int		i;
 	int		len;
@@ -96,7 +96,8 @@ void	set_maps(t_list *paths, t_ant *ants, int ant_c)
 		while (paths && i != ant_c)
 		{
 			len = (int)paths->content_size / sizeof(int);
-			if (len == shortest || ant_c - i >= len)
+			if (len == shortest
+				|| (g.nodes[((int *)paths->content)[1]].type != POSP))
 			{
 				ants[i].path = paths->content;
 				paths = paths->next;
