@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtan <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 14:11:16 by mtan              #+#    #+#             */
-/*   Updated: 2018/03/31 14:11:25 by mtan             ###   ########.fr       */
+/*   Updated: 2018/04/02 15:03:17 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g)
 	t_vertex	tmp[42];
 	char		*line;
 	int			i;
+	int			start;
+	int			end;
 
 	parse_ants(ants, ant_count);
 	line = parse_vertex(tmp, &i);
@@ -86,11 +88,13 @@ void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g)
 		g->nodes[i].number = i;
 		g->nodes[i].name = ft_strdup(tmp[i].name);
 		g->nodes[i].type = tmp[i].type ? tmp[i].type : 0;
+		start = tmp[i].type == START ? i : start;
+		end = tmp[i].type == END ? i : end;
 		g->nodes[i].children = NULL;
 	}
 	parse_links(g, tmp, line);
 	i = -1;
 	while (++i < g->V)
 		free(tmp[i].name);
-	*p = find_paths(*g, 2, 3);
+	*p = find_paths(*g, start, end);
 }
