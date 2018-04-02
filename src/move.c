@@ -15,15 +15,26 @@
 #include "memory.h"
 #include "ft_printf.h"
 
-size_t	int_tab_ind(int *a, size_t size, int el)
+void	set_short_paths_rooms(t_graph g, t_list *paths)
 {
-	size_t	i;
+	int			i;
+	int			len;
+	int			shortest;
+	t_vertex	*current;
 
+	shortest = (int)paths->content_size / sizeof(int);
+	while (paths)
+	{
 	i = -1;
-	while (++i < size)
-		if (a[i] == el)
-			return (i);
-	return (-1);
+		len = (int)paths->content_size / sizeof(int);
+		while (len == shortest && ++i < len)
+		{
+			current = &g.nodes[((int *)paths->content)[i]];
+			if (current->type != START && current->type != END)
+				current->type = POSP;
+		}
+		paths = paths->next;
+	}
 }
 
 int		can_move(t_graph g, t_ant ant)
