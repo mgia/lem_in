@@ -6,12 +6,24 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 14:12:51 by mtan              #+#    #+#             */
-/*   Updated: 2018/03/31 23:25:11 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/02 15:20:56 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "libft.h"
+
+void	print_rooms_info(t_graph g)
+{
+	int		i;
+
+	i = -1;
+	while (++i < g.V)
+	{
+		ft_printf("#%d:\n", i);
+		ft_printf("Type: %d\n", g.nodes[i].type);
+	}
+}
 
 void	print_int_arr(int *a, int size)
 {
