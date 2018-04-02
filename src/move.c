@@ -6,12 +6,13 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 12:33:02 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/31 16:54:13 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/02 14:05:49 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "list.h"
+#include "memory.h"
 #include "ft_printf.h"
 
 size_t	int_tab_ind(int *a, size_t size, int el)
@@ -29,6 +30,8 @@ int		can_move(t_graph g, t_ant ant)
 {
 	t_vertex	next;
 
+	if (ant.path == NULL)
+		return (0);
 	next = g.nodes[ant.path[ant.progress + 1]];
 	if (next.type == END || next.ants == 0)
 		return (1);
@@ -38,17 +41,19 @@ int		can_move(t_graph g, t_ant ant)
 int		turn(t_graph g, t_ant *ants, int ant_count)
 {
 	int		i;
-	int		ant_at_end;
+	int		*fants;
 	int		need_space;
 
-	ant_at_end = 0;
-	while (ant_at_end != ant_count)
+	need_space = 1;
+	fants = ft_memalloc(sizeof(int) * ant_count);
+	while (need_space)
 	{
+		ft_printf("\n");
 		need_space = 0;
-		i = ant_at_end - 1;
+		i = -1;
 		while (++i < ant_count)
 		{
-			if (ants[i].path != NULL && can_move(g, ants[i]))
+			if (fants[i] == 0 && can_move(g, ants[i]))
 			{
 				g.nodes[ants[i].path[ants[i].progress]].ants--;
 				ants[i].progress++;
@@ -58,10 +63,10 @@ int		turn(t_graph g, t_ant *ants, int ant_count)
 				need_space = 1;
 			}
 			if (g.nodes[ants[i].path[ants[i].progress]].type == END)
-				ant_at_end++;
+				fants[i] = 1;
 		}
-		ft_printf("\n");
 	}
+	ft_memdel((void **)&fants);
 	return (1);
 }
 
