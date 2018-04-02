@@ -25,6 +25,7 @@ void	ivan_test(void)
 	i = -1;
 	while (++i < g.V)
 	{
+		g.nodes[i].type = REGULAR;
 		g.nodes[i].number = i;
 		g.nodes[i].children = NULL;
 		g.nodes[i].ants = 0;
@@ -37,16 +38,17 @@ void	ivan_test(void)
 	add_edge(&g, 1, 3);
 	g.nodes[2].type = START;
 	g.nodes[3].type = END;
+	int a = 42;
 	p = find_paths(g, 2, 3);
-	ants = malloc(sizeof(t_ant) * 3);
+	ants = malloc(sizeof(t_ant) * a);
 	i = -1;
-	while (++i < 3)
+	while (++i < a)
 	{
 		ants[i].progress = 0;
 		ants[i].path = NULL;
-		ants[i].number = 1;
+		ants[i].number = a;
 	}
-	move_ants(g, p, ants, 3);
+	move_ants(g, p, ants, a);
 	ft_lstdel(&p, ft_free_content);
 	free_graph(&g);
 }
