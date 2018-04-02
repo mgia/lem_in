@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 12:33:02 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/04/02 14:05:49 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/02 15:21:44 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	set_maps(t_graph g, t_list *paths, t_ant *ants, int ant_c)
 		{
 			len = (int)paths->content_size / sizeof(int);
 			if (len == shortest
-				|| (g.nodes[((int *)paths->content)[1]].type != POSP))
+				|| (g.nodes[((int *)paths->content)[1]].type != POSP
+				&& shortest != 2 && ant_c - i >= len))
 			{
 				ants[i].path = paths->content;
 				paths = paths->next;
