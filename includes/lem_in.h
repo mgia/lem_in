@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:00:21 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/04/02 15:06:52 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/02 15:21:10 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	free_graph(t_graph *g);
 void	free_all(t_list *p, t_graph *g, t_ant *ants);
 void	print_paths(t_list *p);
 void	print_names(t_vertex *v, t_graph g);
+void	print_int_arr(int *a, int size);
 
 /*
 ** Libft Additional Functions
