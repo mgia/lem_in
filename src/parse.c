@@ -20,6 +20,12 @@ void	parse_ants(t_ant **ants, int *ant_count)
 
 	if (!get_next_line(0, &line))
 		error("Error: No File");
+	while (line[0] == '#')
+	{
+		ft_putendl(line);
+		free(line);
+		get_next_line(0, &line);
+	}
 	*ant_count = ft_atoi(line);
 	if (!ft_isdigit_str(line) || *ant_count <= 0)
 		error("Error: No Ants");
@@ -67,7 +73,15 @@ void	parse_links(t_graph *g, t_vertex *v, char *line)
 		error("Error: No Links");
 	store_link(g, v, line);
 	while (get_next_line(0, &line))
-		store_link(g, v, line);
+	{
+		if (line[0] == '#')
+		{
+			ft_putendl(line);
+			free(line);
+		}
+		else
+			store_link(g, v, line);
+	}
 }
 
 void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g)
