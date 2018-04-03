@@ -27,7 +27,6 @@ class Parser:
 				break
 			else:
 				split = line.strip().split(' ')
-				print(split)
 				room = Room(split[0], int(split[1]), int(split[2]), room_type)
 				rooms.append(room)
 				room_type = 'none'
@@ -37,8 +36,7 @@ class Parser:
 		edges = list()
 		while line.strip():
 			split = line.strip().split('-')
-			print(split)
-			edges.append(Edge(split[0], split[1]))
+			edges.append(Edge(int(split[0]), int(split[1])))
 			line = read_line()
 		return edges
 
