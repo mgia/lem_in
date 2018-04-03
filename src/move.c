@@ -30,6 +30,7 @@ void	set_short_paths_rooms(t_graph g, t_list *paths)
 		while (len == shortest && ++i < len)
 		{
 			current = &g.nodes[((int *)paths->content)[i]];
+			current->ants = 0;
 			if (current->type != START && current->type != END)
 				current->type = POSP;
 		}
