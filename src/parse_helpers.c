@@ -13,17 +13,37 @@
 #include "lem_in.h"
 #include "libft.h"
 
-void		parse_comment(char *line, int *ends, int *i, t_vertex *v)
+void		parse_comment(char *line, int *i, t_vertex *v, int *prev)
 {
-	if (line[1] == '#')
+	if (line[1] == '#' && (ft_strstr(line, "start") || ft_strstr(line, "end")))
 	{
-		(*ends)++;
+		*prev = 1;
 		if (ft_strstr(line, "start"))
 			v[*i].type = START;
 		else if (ft_strstr(line, "end"))
 			v[*i].type = END;
 	}
 	(*i)--;
+}
+
+static void	check_coordinates(char *line)
+{
+	while (*line == ' ')
+		line++;
+	while (*line != ' ')
+	{
+		if (!ft_isdigit(*line))
+			error("Error: Bad coordinates");
+		line++;
+	}
+	while (*line == ' ')
+		line++;
+	while (*line != ' ' && *line)
+	{
+		if (!ft_isdigit(*line))
+			error("Error: Bad coordinates");
+		line++;
+	}
 }
 
 void		store_vertex(t_vertex *v, char *line, int i)
@@ -38,6 +58,7 @@ void		store_vertex(t_vertex *v, char *line, int i)
 	v[i].name = ft_strndup(line, j);
 	v[i].number = i;
 	v[i].children = NULL;
+	check_coordinates(&line[j]);
 }
 
 static void	free_reference(char **tmp)
@@ -56,12 +77,16 @@ void		store_link(t_graph *g, t_vertex *v, char *line)
 
 	tmp = ft_strsplit(line, '-');
 	j = 0;
-	while (!ft_strequ(tmp[0], v[j].name))
+	while (j < g->V && !ft_strequ(tmp[0], v[j].name))
 		j++;
+	if (j >= g->V)
+		error("Error: No matching room for link");
 	x = j;
 	j = 0;
-	while (!ft_strequ(tmp[1], v[j].name))
+	while (j < g->V && !ft_strequ(tmp[1], v[j].name))
 		j++;
+	if (j >= g->V)
+		error("Error: No matching room for link");
 	y = j;
 	ft_putendl(line);
 	add_edge(g, x, y);

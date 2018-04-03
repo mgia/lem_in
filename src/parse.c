@@ -30,7 +30,7 @@ void	parse_ants(t_ant **ants, int *ant_count)
 	}
 	*ant_count = ft_atoi(line);
 	if (!ft_isdigit_str(line) || *ant_count <= 0)
-		error("Error: No Ants");
+		error("Error: No Ants or bad Ants");
 	*ants = malloc(sizeof(t_ant) * (*ant_count));
 	i = -1;
 	while (++i < *ant_count)
@@ -47,28 +47,37 @@ char	*parse_vertex(t_vertex *v, int *i)
 {
 	char		*line;
 	int			ends;
+	int			prev;
 
 	*i = 0;
 	ends = 0;
+	prev = 0;
 	while (get_next_line(0, &line))
 	{
 		if (ft_strchr(line, '-'))
 			break ;
 		else if (line[0] == '#')
-			parse_comment(line, &ends, i, v);
+			parse_comment(line, i, v, &prev);
 		else
+		{
+			if (prev == 1)
+			{
+				ends++;
+				prev = 0;
+			}
 			store_vertex(v, line, *i);
+		}
 		(*i)++;
 		ft_putendl(line);
 		free(line);
 		line = NULL;
 	}
 	if (!line)
-		printf("Error: No links");
+		error("Error: No Links");
 	if (!*i)
-		error("Error: No rooms");
-	if (ends < 2)
-		error("Error: No Start or End");
+		error("Error: No rooms or illegal name");
+	if (ends < 2 || prev)
+		error("Error: No start/end or illegal name");
 	return (line);
 }
 
@@ -79,6 +88,8 @@ void	parse_links(t_graph *g, t_vertex *v, char *line)
 	store_link(g, v, line);
 	while (get_next_line(0, &line))
 	{
+		if (!ft_strstr(line, "-"))
+			error("Error: Bad Links");
 		if (line[0] == '#')
 		{
 			ft_putendl(line);
@@ -102,7 +113,6 @@ void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g)
 	g->V = i;
 	g->nodes = malloc(sizeof(t_vertex) * g->V);
 	i = -1;
-	error("Cut");
 	while (++i < g->V)
 	{
 		g->nodes[i].number = i;
@@ -116,6 +126,5 @@ void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g)
 	i = -1;
 	while (++i < g->V)
 		free(tmp[i].name);
-	// *p = find_paths(*g, start, end);
-	*p = NULL;
+	*p = find_paths(*g, start, end);
 }
