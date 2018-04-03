@@ -39,7 +39,8 @@ void	ivan_test(void)
 	g.nodes[2].type = START;
 	g.nodes[3].type = END;
 	int a = 42;
-	p = find_paths(g, 2, 3);
+	// p = find_paths(g, 2, 3);
+	p = breadth_search(g, g.nodes[2], g.nodes[2]);
 	ants = malloc(sizeof(t_ant) * a);
 	i = -1;
 	while (++i < a)

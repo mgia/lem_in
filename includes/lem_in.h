@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:00:21 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/04/02 15:21:10 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/02 20:38:34 by ivankozlov       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,13 @@ struct					s_ant
 };
 typedef struct s_ant	t_ant;
 
+struct					s_path
+{
+	int					*array;
+	size_t				size;
+};
+typedef struct s_path	t_path;
+
 /*
 ** Parsers
 */
@@ -77,6 +84,7 @@ void	store_vertex(t_vertex *v, char *line, int i);
 
 void	add_edge(t_graph *g, int p, int c);
 t_list	*find_paths(t_graph g, int s, int e);
+t_list	*breadth_search(t_graph g, t_vertex c, t_vertex e);
 void	move_ants(t_graph g, t_list *paths, t_ant *ants, int ant_count);
 
 /*
