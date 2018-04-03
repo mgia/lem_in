@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   queue.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:14:06 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/03/28 20:58:48 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/02 20:52:07 by ivankozlov       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ size_t			q_push(void *data, size_t size)
 	if (g_queue == NULL)
 		g_queue = item;
 	else
-		ft_lstadd(&g_queue, item);
+		ft_lstaddback(&g_queue, item);
 	return (++g_count);
 }
 
