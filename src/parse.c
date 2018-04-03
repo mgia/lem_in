@@ -88,13 +88,13 @@ void	parse_links(t_graph *g, t_vertex *v, char *line)
 	store_link(g, v, line);
 	while (get_next_line(0, &line))
 	{
-		if (!ft_strstr(line, "-"))
-			error("Error: Bad Links");
 		if (line[0] == '#')
 		{
 			ft_putendl(line);
 			free(line);
 		}
+		else if (!ft_strstr(line, "-"))
+			error("Error: Bad Links");
 		else
 			store_link(g, v, line);
 	}
