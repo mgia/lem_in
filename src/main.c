@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 10:56:53 by mtan              #+#    #+#             */
-/*   Updated: 2018/04/02 15:08:04 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/03 13:09:09 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ivan_test(void)
 	g.nodes[3].type = END;
 	int a = 42;
 	// p = find_paths(g, 2, 3);
-	p = breadth_search(g, g.nodes[2], g.nodes[2]);
+	p = breadth_search(g, g.nodes[2], g.nodes[3]);
 	ants = malloc(sizeof(t_ant) * a);
 	i = -1;
 	while (++i < a)
@@ -49,21 +49,22 @@ void	ivan_test(void)
 		ants[i].path = NULL;
 		ants[i].number = a;
 	}
-	move_ants(g, p, ants, a);
+	// move_ants(g, p, ants, a);
 	ft_lstdel(&p, ft_free_content);
 	free_graph(&g);
 }
 
 int		main(void)
 {
-	t_graph		g;
-	t_ant		*ants;
-	int			ant_count;
-	t_list		*p;
+	// t_graph		g;
+	// t_ant		*ants;
+	// int			ant_count;
+	// t_list		*p;
 
-	parse_input(&ants, &ant_count, &p, &g);
-	print_paths(p);
-	move_ants(g, p, ants, ant_count);
-	free_all(p, &g, ants);
+	// parse_input(&ants, &ant_count, &p, &g);
+	// print_paths(p);
+	// move_ants(g, p, ants, ant_count);
+	// free_all(p, &g, ants);
+	ivan_test();
 	return (0);
 }

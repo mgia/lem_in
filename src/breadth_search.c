@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   breadth_search.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 19:39:46 by ivankozlov        #+#    #+#             */
-/*   Updated: 2018/04/02 20:51:32 by ivankozlov       ###   ########.fr       */
+/*   Updated: 2018/04/03 13:30:50 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "memory.h"
 #include "queue.h"
+#include "numbers.h"
+#include "ft_printf.h"
 #include "list.h"
 
 // // utility function for finding paths in graph
@@ -77,20 +79,35 @@ t_list	*breadth_search(t_graph g, t_vertex c, t_vertex e)
 	while (q_peek())
 	{
 		path = *(t_path *)q_pop();
+		ft_printf("Popped path for queue\n");
+		print_int_arr(path.array, path.size);
+		q_print();
 		last = g.nodes[path.array[path.size - 1]];
 		if (last.number == e.number)
 		{
+			// ft_printf("Found path\n");
+			// print_int_arr(path.array, path.size);
 			tmp = ft_lstnew(path.array, path.size * sizeof(int));
 			paths == NULL ? paths = tmp : ft_lstaddback(&paths, tmp);
-			while (last.children)
+		}
+		while (last.children)
+		{
+			if (is_in_arr(path.array, path.size, (*(t_vertex *)last.children->content).number) < 0)
 			{
-				path_push_back(&path, (*(t_vertex *)last.children->content).number);
-				q_push(&path, path.size * sizeof(int));
-				last.children = last.children->next;
+				path_push_back(&path,
+					(*(t_vertex *)last.children->content).number);
+				ft_printf("Adding path to queue\n");
+				print_int_arr(path.array, path.size);
+				q_push(&path, sizeof(t_path));
+				q_print();
+				path.size--;
 			}
+			last.children = last.children->next;
 		}
 	}
 	q_destroy();
 	ft_memdel((void **)&path.array);
+	if (!paths)
+		ft_printf("No paths found\n");
 	return (paths);
 }
