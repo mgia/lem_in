@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 10:56:53 by mtan              #+#    #+#             */
-/*   Updated: 2018/04/03 21:11:35 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/03 21:19:44 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,14 @@ void	ivan_test(void)
 
 int		main(void)
 {
-	// t_graph		g;
-	// t_ant		*ants;
-	// int			ant_count;
-	// t_list		*p;
+	t_graph		g;
+	t_ant		*ants;
+	int			ant_count;
+	t_list		*p;
 
-	// parse_input(&ants, &ant_count, &p, &g);
-	// print_paths(p);
-	// move_ants(g, p, ants, ant_count);
-	// free_all(p, &g, ants);
-	ivan_test();
+	parse_input(&ants, &ant_count, &p, &g);
+	print_paths(p);
+	move_ants(g, p, ants, ant_count);
+	free_all(p, &g, ants);
 	return (0);
 }
