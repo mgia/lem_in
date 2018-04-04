@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 12:33:02 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/04/03 23:15:30 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/03 23:18:02 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int		turn(t_graph g, t_ant *ants, int *fants, int ant_count)
 			g.nodes[ants[i].path[ants[i].progress]].ants--;
 			ants[i].progress++;
 			g.nodes[ants[i].path[ants[i].progress]].ants++;
-			ft_printf("%sL%d-%d", moved == 1 ? " " : "",
-				i, g.nodes[ants[i].path[ants[i].progress]].number);
+			ft_printf("%sL%d-%s", moved == 1 ? " " : "",
+				i, g.nodes[ants[i].path[ants[i].progress]].name);
 			moved = 1;
 		}
 		if (g.nodes[ants[i].path[ants[i].progress]].type == END)
