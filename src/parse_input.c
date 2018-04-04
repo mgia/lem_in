@@ -47,5 +47,7 @@ void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g)
 	i = -1;
 	while (++i < g->V)
 		free(tmp[i].name);
-	*p = find_paths(*g, start, end);
+	i = MIN(ft_lstcount(g->nodes[start].children),
+		ft_lstcount(g->nodes[end].children));
+	*p = breadth_search(*g, g->nodes[start], g->nodes[end], i);
 }
