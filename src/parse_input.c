@@ -27,6 +27,7 @@ void	create_graph(t_graph *g, t_vertex tmp[10000], int *start, int *end)
 		(*start) = tmp[i].type == START ? i : (*start);
 		(*end) = tmp[i].type == END ? i : (*end);
 		g->nodes[i].children = NULL;
+		g->nodes[i].ants = 0;
 	}
 }
 
