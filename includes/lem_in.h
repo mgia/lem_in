@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivankozlov <ivankozlov@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:00:21 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/04/02 20:38:34 by ivankozlov       ###   ########.fr       */
+/*   Updated: 2018/04/03 21:15:56 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,14 @@ void	add_edge(t_graph *g, int p, int c);
 t_list	*find_paths(t_graph g, int s, int e);
 t_list	*breadth_search(t_graph g, t_vertex c, t_vertex e);
 void	move_ants(t_graph g, t_list *paths, t_ant *ants, int ant_count);
+
+/*
+** Path
+*/
+
+void	init_path(t_path *p, size_t size);
+void	path_push_back(t_path *p, int el);
+t_path	*path_create_copy(t_path p, size_t size);
 
 /*
 ** Helpers
