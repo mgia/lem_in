@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 14:11:16 by mtan              #+#    #+#             */
-/*   Updated: 2018/04/02 15:03:17 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/03 21:13:02 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,5 @@ void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g)
 	i = -1;
 	while (++i < g->V)
 		free(tmp[i].name);
-	*p = find_paths(*g, start, end);
+	*p = breadth_search(*g, g->nodes[start], g->nodes[end]);
 }
