@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_helpers.c                                    :+:      :+:    :+:   */
+/*   parse_ants.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,21 +13,36 @@
 #include "lem_in.h"
 #include "libft.h"
 
-void	parse_comment(char *line, int *i, t_vertex *v, int *prev)
+void	store_ants(t_ant **ants, int *ant_count)
 {
-	if (line[1] == '#' && (ft_strstr(line, "start") || ft_strstr(line, "end")))
+	int		i;
+
+	*ants = malloc(sizeof(t_ant) * (*ant_count));
+	i = -1;
+	while (++i < *ant_count)
 	{
-		*prev = 1;
-		if (ft_strstr(line, "start"))
-			v[*i].type = START;
-		else if (ft_strstr(line, "end"))
-			v[*i].type = END;
+		(*ants)[i].progress = 0;
+		(*ants)[i].path = NULL;
+		(*ants)[i].number = *ant_count;
 	}
-	(*i)--;
 }
 
-void	put_line(char *line)
+void	parse_ants(t_ant **ants, int *ant_count)
 {
-	ft_putendl(line);
-	free(line);
+	char	*line;
+
+	if (!get_next_line(0, &line))
+		error("Error: No File");
+	if (!line)
+		error("Error: Empty File");
+	while (line[0] == '#')
+	{
+		put_line(line);
+		get_next_line(0, &line);
+	}
+	*ant_count = ft_atoi(line);
+	if (!ft_isdigit_str(line) || *ant_count <= 0)
+		error("Error: No Ants or bad Ants");
+	store_ants(ants, ant_count);
+	put_line(line);
 }
