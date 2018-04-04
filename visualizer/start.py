@@ -18,10 +18,10 @@ from tkinter import *
 ################################################################################
 
 # Parse input
-rooms, edges, moves = Parser().parse_input()
+# rooms, edges, moves = Parser().parse_input()
 
-root = Tk()
-root.wm_title("Lemin: Animated Graph embedded in TK")
+# root = Tk()
+# root.wm_title("Lemin: Animated Graph embedded in TK")
 
 # Matplotlib: create figure
 f = plt.figure(figsize=(5,4))
