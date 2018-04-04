@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 19:39:46 by ivankozlov        #+#    #+#             */
-/*   Updated: 2018/04/03 21:16:19 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/03 21:27:23 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@ void	iterate_children(t_vertex node, t_path path, size_t path_max_size)
 	}
 }
 
-t_list	*breadth_search(t_graph g, t_vertex c, t_vertex e)
+t_list	*breadth_search(t_graph g, t_vertex c, t_vertex e, size_t max)
 {
-	t_path		path;
 	t_path		*p;
 	t_list		*paths;
 
 	paths = NULL;
 	q_init();
-	init_path(&path, g.V);
-	path_push_back(&path, c.number);
-	q_push(&path, sizeof(t_path));
-	while (q_peek())
+	p = ft_memalloc(sizeof(t_path));
+	init_path(p, g.V);
+	path_push_back(p, c.number);
+	q_push(p, sizeof(t_path));
+	while (q_peek() && ft_lstcount(paths) < max)
 	{
 		p = (t_path *)q_pop();
 		c = g.nodes[p->array[p->size - 1]];

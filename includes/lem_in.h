@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:00:21 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/04/03 21:15:56 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/03 21:27:49 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	store_vertex(t_vertex *v, char *line, int i);
 
 void	add_edge(t_graph *g, int p, int c);
 t_list	*find_paths(t_graph g, int s, int e);
-t_list	*breadth_search(t_graph g, t_vertex c, t_vertex e);
+t_list	*breadth_search(t_graph g, t_vertex c, t_vertex e, size_t max);
 void	move_ants(t_graph g, t_list *paths, t_ant *ants, int ant_count);
 
 /*
