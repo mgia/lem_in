@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_helpers.c                                    :+:      :+:    :+:   */
+/*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,21 +13,38 @@
 #include "lem_in.h"
 #include "libft.h"
 
-void	parse_comment(char *line, int *i, t_vertex *v, int *prev)
+void	create_graph(t_graph *g, t_vertex tmp[10000], int *start, int *end)
 {
-	if (line[1] == '#' && (ft_strstr(line, "start") || ft_strstr(line, "end")))
+	int i;
+
+	g->nodes = malloc(sizeof(t_vertex) * g->V);
+	i = -1;
+	while (++i < g->V)
 	{
-		*prev = 1;
-		if (ft_strstr(line, "start"))
-			v[*i].type = START;
-		else if (ft_strstr(line, "end"))
-			v[*i].type = END;
+		g->nodes[i].number = i;
+		g->nodes[i].name = ft_strdup(tmp[i].name);
+		g->nodes[i].type = tmp[i].type ? tmp[i].type : 0;
+		(*start) = tmp[i].type == START ? i : (*start);
+		(*end) = tmp[i].type == END ? i : (*end);
+		g->nodes[i].children = NULL;
 	}
-	(*i)--;
 }
 
-void	put_line(char *line)
+void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g)
 {
-	ft_putendl(line);
-	free(line);
+	t_vertex	tmp[10000];
+	char		*line;
+	int			i;
+	int			start;
+	int			end;
+
+	parse_ants(ants, ant_count);
+	line = parse_vertex(tmp, &i);
+	g->V = i;
+	create_graph(g, tmp, &start, &end);
+	parse_links(g, tmp, line);
+	i = -1;
+	while (++i < g->V)
+		free(tmp[i].name);
+	*p = find_paths(*g, start, end);
 }

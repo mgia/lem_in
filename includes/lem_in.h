@@ -70,13 +70,17 @@ typedef struct s_path	t_path;
 ** Parsers
 */
 
+void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g);
 void	parse_ants(t_ant **ants, int *ant_count);
 char	*parse_vertex(t_vertex *v, int *i);
 void	parse_links(t_graph *g, t_vertex *v, char *line);
-void	store_link(t_graph *g, t_vertex *v, char *line);
-void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g);
+
+/*
+** Parse Helpers
+*/
+
 void	parse_comment(char *line, int *i, t_vertex *v, int *prev);
-void	store_vertex(t_vertex *v, char *line, int i);
+void	put_line(char *line);
 
 /*
 ** Algorithm
