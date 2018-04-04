@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:14:06 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/04/03 13:23:31 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/03 21:06:20 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void			q_print(void)
 	head = g_queue;
 	while (g_queue && ++i >= 0)
 	{
-		ft_printf("#%d:%p %s", i, g_queue->content, i != (int)g_count ? "-> " : "");
+		ft_printf("#%d:%p %s", i, ((t_path *)g_queue->content)->array, i != (int)g_count ? "-> " : "");
 		tmp = *(t_path *)g_queue->content;
 		j = -1;
 		while (++j < (int)tmp.size)
