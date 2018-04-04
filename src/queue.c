@@ -28,13 +28,17 @@ void			q_init(void)
 }
 
 /*
-** Operation:	Frees and destroys queue.
+** Argument:	1. Void pointer function to delete the node properly.
+** Operation:	Frees and destroys queue usign del function
+**				or default ft_free_content if del was not provided.
 */
 
-void			q_destroy(void)
+void			q_destroy(void (*del)(void *, size_t))
 {
+	if (!del)
+		del = ft_free_content;
 	g_count = 0;
-	ft_lstdel(&g_queue, ft_free_content);
+	ft_lstdel(&g_queue, del);
 	return ;
 }
 

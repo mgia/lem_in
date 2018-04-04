@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:49:14 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/04/03 13:08:42 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/03 21:06:55 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 void			*q_pop(void);
 void			*q_peek(void);
 void			q_init(void);
-void			q_destroy(void);
+void			q_destroy(void (*del)(void *, size_t));
 size_t			q_push(void *data, size_t size);
 void			q_print(void);
 
