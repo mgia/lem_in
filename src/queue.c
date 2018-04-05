@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:14:06 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/04/03 21:06:20 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/04 20:21:29 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,26 +91,4 @@ void			*q_pop(void)
 	g_queue = ft_lstdelfirst(&g_queue, ft_save_content);
 	g_count--;
 	return (data);
-}
-
-void			q_print(void)
-{
-	int		i;
-	int		j;
-	t_path	tmp;
-	t_list	*head;
-
-	i = -1;
-	head = g_queue;
-	while (g_queue && ++i >= 0)
-	{
-		ft_printf("#%d:%p %s", i, ((t_path *)g_queue->content)->array, i != (int)g_count ? "-> " : "");
-		tmp = *(t_path *)g_queue->content;
-		j = -1;
-		while (++j < (int)tmp.size)
-			ft_printf("%d ", tmp.array[j]);
-		g_queue = g_queue->next;
-	}
-	ft_printf("\n");
-	g_queue = head;
 }
