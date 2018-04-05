@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 19:39:46 by ivankozlov        #+#    #+#             */
-/*   Updated: 2018/04/03 21:27:23 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/04 19:58:59 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_list	*breadth_search(t_graph g, t_vertex c, t_vertex e, size_t max)
 	init_path(p, g.V);
 	path_push_back(p, c.number);
 	q_push(p, sizeof(t_path));
+	ft_memdel((void **)&p);
 	while (q_peek() && ft_lstcount(paths) < max)
 	{
 		p = (t_path *)q_pop();
