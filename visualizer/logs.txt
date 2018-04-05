@@ -1,0 +1,17 @@
+read: 3
+read: ##start
+read: 0 0 0
+read: 1 1 1
+read: 2 2 2
+read: ##end
+read: 3 3 3
+read: 0-1
+read: 1-2
+read: 2-3
+read: 
+read: L0-1
+read: L0-2 L1-1
+read: L0-3 L1-2 L2-1
+read: L1-3 L2-2
+read: L2-3
+read: 
