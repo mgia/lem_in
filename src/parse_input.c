@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtan <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 22:08:08 by mtan              #+#    #+#             */
-/*   Updated: 2018/04/03 22:08:13 by mtan             ###   ########.fr       */
+/*   Updated: 2018/04/04 20:27:29 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	create_graph(t_graph *g, t_vertex tmp[10000], int *start, int *end)
 {
 	int i;
 
-	g->nodes = malloc(sizeof(t_vertex) * g->V);
+	g->nodes = malloc(sizeof(t_vertex) * g->v);
 	i = -1;
-	while (++i < g->V)
+	while (++i < g->v)
 	{
 		g->nodes[i].number = i;
 		g->nodes[i].name = ft_strdup(tmp[i].name);
@@ -41,11 +41,11 @@ void	parse_input(t_ant **ants, int *ant_count, t_list **p, t_graph *g)
 
 	parse_ants(ants, ant_count);
 	line = parse_vertex(tmp, &i);
-	g->V = i;
+	g->v = i;
 	create_graph(g, tmp, &start, &end);
 	parse_links(g, tmp, line);
 	i = -1;
-	while (++i < g->V)
+	while (++i < g->v)
 		free(tmp[i].name);
 	i = MIN(ft_lstcount(g->nodes[start].children),
 		ft_lstcount(g->nodes[end].children));

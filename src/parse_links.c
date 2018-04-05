@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 22:08:08 by mtan              #+#    #+#             */
-/*   Updated: 2018/04/03 22:47:24 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/04 20:27:29 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ void		store_link(t_graph *g, t_vertex *v, char *line)
 
 	tmp = ft_strsplit(line, '-');
 	j = 0;
-	while (j < g->V && !ft_strequ(tmp[0], v[j].name))
+	while (j < g->v && !ft_strequ(tmp[0], v[j].name))
 		j++;
-	if (j >= g->V)
+	if (j >= g->v)
 		error("Error: No matching room for link");
 	x = j;
 	j = 0;
-	while (j < g->V && !ft_strequ(tmp[1], v[j].name))
+	while (j < g->v && !ft_strequ(tmp[1], v[j].name))
 		j++;
-	if (j >= g->V)
+	if (j >= g->v)
 		error("Error: No matching room for link");
 	y = j;
 	ft_putendl(line);

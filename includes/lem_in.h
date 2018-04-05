@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 14:00:21 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/04/04 20:23:27 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/04 20:27:03 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_vertex	t_vertex;
 
 struct					s_graph
 {
-	int					V;
+	int					v;
 	t_vertex			*nodes;
 };
 typedef struct s_graph	t_graph;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers_print.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtan <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 20:21:25 by mtan              #+#    #+#             */
-/*   Updated: 2018/04/04 20:21:26 by mtan             ###   ########.fr       */
+/*   Updated: 2018/04/04 20:26:55 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_rooms_info(t_graph g)
 	int		i;
 
 	i = -1;
-	while (++i < g.V)
+	while (++i < g.v)
 	{
 		ft_printf("#%d:\n", i);
 		ft_printf("Type: %d\n", g.nodes[i].type);
@@ -39,7 +39,7 @@ void	print_names(t_vertex *v, t_graph g)
 	int i;
 
 	i = -1;
-	while (++i < g.V)
+	while (++i < g.v)
 		ft_printf("Vertex [%d]: %s\n", i, v[i].name);
 }
 

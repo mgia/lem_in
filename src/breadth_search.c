@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 19:39:46 by ivankozlov        #+#    #+#             */
-/*   Updated: 2018/04/04 19:58:59 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/04 20:26:58 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_list	*breadth_search(t_graph g, t_vertex c, t_vertex e, size_t max)
 	paths = NULL;
 	q_init();
 	p = ft_memalloc(sizeof(t_path));
-	init_path(p, g.V);
+	init_path(p, g.v);
 	path_push_back(p, c.number);
 	q_push(p, sizeof(t_path));
 	ft_memdel((void **)&p);
@@ -66,7 +66,7 @@ t_list	*breadth_search(t_graph g, t_vertex c, t_vertex e, size_t max)
 		else if (c.number == e.number && paths != NULL)
 			ft_lstaddback(&paths,
 				ft_lstnew(p->array, p->size * sizeof(int)));
-		iterate_children(c, *p, g.V);
+		iterate_children(c, *p, g.v);
 		ft_memdel((void **)&p->array);
 		ft_memdel((void **)&p);
 	}
