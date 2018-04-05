@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 14:12:51 by mtan              #+#    #+#             */
-/*   Updated: 2018/04/02 15:20:56 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/04 20:27:30 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_graph(t_graph *g)
 	int		i;
 
 	i = -1;
-	while (++i < g->V)
+	while (++i < g->v)
 	{
 		free(g->nodes[i].name);
 		if (g->nodes[i].children)
