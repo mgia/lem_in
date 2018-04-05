@@ -6,7 +6,7 @@
 /*   By: ikozlov <ikozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 16:35:44 by ikozlov           #+#    #+#             */
-/*   Updated: 2018/04/04 16:10:39 by ikozlov          ###   ########.fr       */
+/*   Updated: 2018/04/04 20:00:49 by ikozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void	add_edge(t_graph *g, int p, int c)
 	{
 		if (!ft_lsthas(l[p].children, child, pathcmp))
 			ft_lstadd(&l[p].children, child);
+		else
+		{
+			ft_memdel((void **)child->data);
+			ft_memdel((void **)child);
+		}
 	}
 	c++;
 }
