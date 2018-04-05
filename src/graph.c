@@ -38,7 +38,7 @@ void	add_edge(t_graph *g, int p, int c)
 		if (!ft_lsthas(l[p].children, child, pathcmp))
 			ft_lstadd(&l[p].children, child);
 		else
-			ft_lstdelone(&child, ft_free_content);
+			ft_lstdelone(&child, ft_save_content);
 	}
 	c++;
 }
