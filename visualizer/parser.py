@@ -44,9 +44,11 @@ class Parser:
 		moves = list()
 		line = read_line()
 		while line:
+			move = []
 			line = line.split(" ")
 			for item in line:
 				item = item.strip("L").strip().split("-")
-				moves.append(Move(item[0], item[1]))
+				move.append(Move(item[0], item[1]))
+			moves.append(move)
 			line = read_line()
 		return moves

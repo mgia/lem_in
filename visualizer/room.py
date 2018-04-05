@@ -4,6 +4,7 @@ class Room:
 		self.x = x
 		self.y = y
 		self.type = _type
+		self.visited = 0
 
 class Edge:
 	def __init__(self, r1, r2):
