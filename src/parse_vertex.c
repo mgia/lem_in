@@ -49,7 +49,7 @@ static void	check_errors(char *line, int i, int ends, int prev)
 	if (!i)
 		error("Error: No rooms or illegal name");
 	if (ends < 2 || prev)
-		error("Error: No start/end or illegal name");
+		error("Error: No start/end or illegal name or underflow");
 }
 
 void		store_vertex(t_vertex *v, char *line, int i)
